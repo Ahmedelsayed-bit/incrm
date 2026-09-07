@@ -157,6 +157,63 @@
             flex-shrink: 0;
         }
 
+        /* Hamburger Menu Button for Mobile */
+        .hamburger-btn {
+            display: none;
+            background: var(--bg-body);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
+            padding: 0.55rem 0.85rem;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Nav Menu Drawer */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 65px;
+            left: 0;
+            width: 100%;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            flex-direction: column;
+            gap: 1.2rem;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary-light);
+        }
+
         /* Mode & Lang Toggle Buttons */
         .icon-btn {
             background: var(--bg-body);
@@ -907,16 +964,26 @@
             }
 
             .logo-img-circular {
-                width: 34px;
-                height: 34px;
+                width: 36px;
+                height: 36px;
             }
 
             .logo-text {
-                font-size: 1rem;
+                font-size: 1.05rem;
             }
 
             .nav-links {
                 display: none;
+            }
+
+            .header-demo-btn {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .nav-controls {
@@ -925,13 +992,12 @@
 
             .icon-btn {
                 padding: 0.4rem 0.6rem;
-                font-size: 0.75rem;
+                font-size: 0.8rem;
                 border-radius: 14px;
             }
 
-            .btn {
-                padding: 0.45rem 0.75rem;
-                font-size: 0.78rem;
+            #themeText, #langText {
+                display: none;
             }
 
             .hero {
@@ -984,21 +1050,35 @@
                 <img src="600982228_757818174007546_215364763236947185_n.jpg" alt="IN Logo Symbol" class="logo-img-circular">
                 <span class="logo-text">IN-CRM</span>
             </a>
+            
             <ul class="nav-links">
                 <li><a href="#features" data-i18n="navFeatures">Features</a></li>
                 <li><a href="#ai-agent" data-i18n="navAiAgent">AI Agent</a></li>
                 <li><a href="#solutions" data-i18n="navIndustries">Industries</a></li>
                 <li><a href="https://wa.me/201211695161" target="_blank" data-i18n="navContact">Contact</a></li>
             </ul>
+
             <div class="nav-controls">
-                <button class="icon-btn" id="themeToggle" type="button">
+                <button class="icon-btn" id="themeToggle" type="button" title="Toggle Theme">
                     <i class="fa-solid fa-moon"></i> <span id="themeText">Dark</span>
                 </button>
-                <button class="icon-btn" id="langToggle" type="button">
+                <button class="icon-btn" id="langToggle" type="button" title="Toggle Language">
                     <i class="fa-solid fa-globe"></i> <span id="langText">العربية</span>
                 </button>
-                <button class="btn btn-primary open-demo-btn" type="button" data-i18n="btnBookDemo">Book a Demo</button>
+                <button class="btn btn-primary open-demo-btn header-demo-btn" type="button" data-i18n="btnBookDemo">Book a Demo</button>
+                <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Nav Menu Drawer -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#features" class="mobile-link" data-i18n="navFeatures">Features</a>
+            <a href="#ai-agent" class="mobile-link" data-i18n="navAiAgent">AI Agent</a>
+            <a href="#solutions" class="mobile-link" data-i18n="navIndustries">Industries</a>
+            <a href="https://wa.me/201211695161" target="_blank" class="mobile-link" data-i18n="navContact">Contact</a>
+            <button class="btn btn-primary open-demo-btn" type="button" style="width: 100%; margin-top: 0.5rem;" data-i18n="btnBookDemo">Book a Demo</button>
         </div>
     </header>
 
@@ -1368,6 +1448,39 @@
         const submitBtn = document.getElementById('submitBtn');
         const policyTextContent = document.getElementById('policyTextContent');
         const termsTextContent = document.getElementById('termsTextContent');
+
+        // Mobile Menu elements
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        // Hamburger Toggle Listener
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('active');
+            const icon = hamburgerBtn.querySelector('i');
+            if(mobileMenu.classList.contains('active')) {
+                icon.className = 'fa-solid fa-xmark';
+            } else {
+                icon.className = 'fa-solid fa-bars';
+            }
+        });
+
+        // Close Mobile Menu when clicking any link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                hamburgerBtn.querySelector('i').className = 'fa-solid fa-bars';
+            });
+        });
+
+        // Close Mobile Menu when clicking outside
+        window.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+                hamburgerBtn.querySelector('i').className = 'fa-solid fa-bars';
+            }
+        });
 
         // Translations Object
         const i18n = {
@@ -1743,7 +1856,11 @@
             document.body.style.overflow = 'auto';
         }
 
-        openDemoButtons.forEach(btn => btn.addEventListener('click', () => openModal(demoModal)));
+        openDemoButtons.forEach(btn => btn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            if (hamburgerBtn.querySelector('i')) hamburgerBtn.querySelector('i').className = 'fa-solid fa-bars';
+            openModal(demoModal);
+        }));
         closeDemoModal.addEventListener('click', () => closeModal(demoModal));
 
         openPrivacyBtn.addEventListener('click', () => openModal(privacyModal));
