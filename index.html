@@ -7,9 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Identity Services Library -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
     <!-- EmailJS SDK Integration -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -100,6 +97,7 @@
             align-items: center;
         }
 
+        /* Professional Circular Logo Box */
         .logo-box {
             display: flex;
             align-items: center;
@@ -159,6 +157,7 @@
             flex-shrink: 0;
         }
 
+        /* Hamburger Menu Button for Mobile */
         .hamburger-btn {
             display: none;
             background: var(--bg-body);
@@ -171,6 +170,7 @@
             transition: all 0.3s ease;
         }
 
+        /* Mobile Nav Menu Drawer */
         .mobile-menu {
             display: none;
             position: fixed;
@@ -214,6 +214,7 @@
             color: var(--primary-light);
         }
 
+        /* Mode & Lang Toggle Buttons */
         .icon-btn {
             background: var(--bg-body);
             color: var(--text-dark);
@@ -330,6 +331,7 @@
             align-items: center;
         }
 
+        /* Mockup Dashboard Card for Hero */
         .dashboard-mockup {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
@@ -788,24 +790,7 @@
             text-align: center;
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Google Quick Sign-In Section inside Modal */
-        .google-signin-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .google-btn-title {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-muted);
+            margin-bottom: 2rem;
         }
 
         .form-grid {
@@ -878,6 +863,7 @@
             background: var(--primary);
         }
 
+        /* Policy & Terms Modal Text Content Styles */
         .text-content-body {
             color: var(--text-dark);
             font-size: 0.95rem;
@@ -959,6 +945,7 @@
             font-size: 0.9rem;
         }
 
+        /* Watermark Styles */
         .watermark {
             text-align: center;
             padding: 15px 0 5px;
@@ -980,31 +967,99 @@
             font-weight: 700;
         }
 
+        /* Mobile & Tablet Responsive Media Queries */
         @media (max-width: 992px) {
-            header { padding: 0.5rem 0; }
-            .container { padding: 0 0.8rem; }
-            .nav-container { gap: 4px; }
-            .logo-box { gap: 6px; }
-            .logo-img-circular { width: 36px; height: 36px; }
-            .logo-text { font-size: 1.05rem; }
-            .nav-links { display: none; }
-            .header-demo-btn { display: none; }
-            .hamburger-btn { display: inline-flex; align-items: center; justify-content: center; }
-            .nav-controls { gap: 5px; }
-            .icon-btn { padding: 0.4rem 0.6rem; font-size: 0.8rem; border-radius: 14px; }
-            #themeText, #langText { display: none; }
-            .hero { padding: 110px 0 50px; }
-            .hero-grid, .ai-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero h1 { font-size: 2rem; }
-            .hero-cta { justify-content: center; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-            .form-grid { grid-template-columns: 1fr; }
-            .form-group.full-width { grid-column: span 1; }
-            .thank-you-title { font-size: 2.2rem; }
+            header {
+                padding: 0.5rem 0;
+            }
+
+            .container {
+                padding: 0 0.8rem;
+            }
+
+            .nav-container {
+                gap: 4px;
+            }
+
+            .logo-box {
+                gap: 6px;
+            }
+
+            .logo-img-circular {
+                width: 36px;
+                height: 36px;
+            }
+
+            .logo-text {
+                font-size: 1.05rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .header-demo-btn {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-controls {
+                gap: 5px;
+            }
+
+            .icon-btn {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+                border-radius: 14px;
+            }
+
+            #themeText, #langText {
+                display: none;
+            }
+
+            .hero {
+                padding: 110px 0 50px;
+            }
+
+            .hero-grid, .ai-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .thank-you-title {
+                font-size: 2.2rem;
+            }
         }
 
         @media (max-width: 380px) {
-            .logo-text { display: none; }
+            .logo-text {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -1062,6 +1117,7 @@
                 </div>
             </div>
             
+            <!-- Dashboard Preview UI Mockup -->
             <div class="dashboard-mockup">
                 <div class="dash-header-bar">
                     <div class="dash-dots">
@@ -1292,23 +1348,12 @@
         </div>
     </section>
 
-    <!-- Demo Modal Window with EmailJS Form & Google Sign-In Button -->
+    <!-- Demo Modal Window with EmailJS Form -->
     <div class="modal-overlay" id="demoModal">
         <div class="demo-card">
             <button class="close-modal" id="closeDemoModal" type="button">&times;</button>
             <h3 data-i18n="modalTitle">Request a Demo</h3>
             <p class="subtitle" data-i18n="modalSub">Leave your details and we'll contact you to show you the system.</p>
-
-            <!-- 1-Click Google Sign-In Button -->
-            <div class="google-signin-wrapper">
-                <span class="google-btn-title" data-i18n="googleBtnText">Or sign in with Google in 1-Click:</span>
-                
-                <div id="g_id_onload"
-                     data-client_id="146815848661-s4gqbq5jpmgua6jlp8s6hfc0q8aljt91.apps.googleusercontent.com"
-                     data-callback="handleCredentialResponse">
-                </div>
-                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="continue_with" data-shape="pill"></div>
-            </div>
             
             <form id="demoForm">
                 <div class="form-grid">
@@ -1462,38 +1507,6 @@
             }
         });
 
-        // Google One-Tap & Button Response Handler
-        function handleCredentialResponse(response) {
-            const responsePayload = parseJwt(response.credential);
-            const currentData = i18n[currentLang];
-
-            // Send Google user information directly to EmailJS
-            emailjs.send("service_lv152q9", "template_rf3ckbd", {
-                full_name: responsePayload.name,
-                whatsapp_number: "Registered via Google",
-                company_name: responsePayload.email,
-                business_type: "Google 1-Click Lead",
-                team_size: "N/A",
-                biggest_problem: "Email obtained via Google Login Permission"
-            }).then(function() {
-                alert(currentData.msgSuccess);
-                closeModal(demoModal);
-            }, function(error) {
-                console.error('EmailJS Google Error:', error);
-                alert(currentData.msgError);
-            });
-        }
-
-        // Helper function to decode Google JWT Token
-        function parseJwt(token) {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        }
-
         // Translations Object
         const i18n = {
             en: {
@@ -1563,7 +1576,6 @@
                 s4Desc: "Centralize order notifications and delivery support workflows.",
                 modalTitle: "Request a Demo",
                 modalSub: "Leave your details and we'll contact you to show you the system.",
-                googleBtnText: "Or sign in with Google in 1-Click:",
                 phName: "Full name",
                 phWa: "WhatsApp number",
                 phCompany: "Company Name",
@@ -1715,7 +1727,6 @@
                 s4Desc: "متابعة الطلبات والشحن وإرسال العروض للعملاء المهتمين.",
                 modalTitle: "طلب عرض توضيحي",
                 modalSub: "اترك بياناتك وسنتواصل معك فوراً لعرض النظام.",
-                googleBtnText: "أو سجل بضغطة زر عبر حساب جوجل:",
                 phName: "الاسم بالكامل",
                 phWa: "رقم الواتساب",
                 phCompany: "اسم الشركة",
@@ -1832,6 +1843,7 @@
         function updateLanguage() {
             const data = i18n[currentLang];
             
+            // Text elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (data[key]) {
@@ -1839,6 +1851,7 @@
                 }
             });
 
+            // Placeholder elements
             document.querySelectorAll('[data-i18n-ph]').forEach(el => {
                 const key = el.getAttribute('data-i18n-ph');
                 if (data[key]) {
@@ -1846,10 +1859,12 @@
                 }
             });
 
+            // Modals Content update
             policyTextContent.innerHTML = data.policyHtml;
             termsTextContent.innerHTML = data.termsHtml;
         }
 
+        // Initialize default language content
         updateLanguage();
 
         // Modal Window Handlers
@@ -1882,7 +1897,7 @@
             if (e.target === termsModal) closeModal(termsModal);
         });
 
-        // EmailJS Form Handler
+        // EmailJS Form Handler with User Credentials
         demoForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -1890,6 +1905,7 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>${currentData.msgSending}</span>`;
 
+            // Configured with Service ID and Template ID
             emailjs.sendForm('service_lv152q9', 'template_rf3ckbd', this)
                 .then(function() {
                     alert(currentData.msgSuccess);
