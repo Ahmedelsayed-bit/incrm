@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Google Identity Services Library -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <!-- EmailJS SDK Integration -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -26,7 +29,7 @@
             --text-dark: #0A192F;
             --text-muted: #5A6A85;
             --white: #FFFFFF;
-            --border-color: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(0, 0, 0, 0.06);
             --input-border: #CBD5E1;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
@@ -72,6 +75,19 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        /* Scroll Reveal Animation Styles */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Header / Navbar */
         header {
             position: fixed;
@@ -97,7 +113,6 @@
             align-items: center;
         }
 
-        /* Professional Circular Logo Box */
         .logo-box {
             display: flex;
             align-items: center;
@@ -157,7 +172,6 @@
             flex-shrink: 0;
         }
 
-        /* Hamburger Menu Button for Mobile */
         .hamburger-btn {
             display: none;
             background: var(--bg-body);
@@ -170,7 +184,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Mobile Nav Menu Drawer */
         .mobile-menu {
             display: none;
             position: fixed;
@@ -214,7 +227,6 @@
             color: var(--primary-light);
         }
 
-        /* Mode & Lang Toggle Buttons */
         .icon-btn {
             background: var(--bg-body);
             color: var(--text-dark);
@@ -287,8 +299,8 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: 3.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
             align-items: center;
         }
 
@@ -331,124 +343,235 @@
             align-items: center;
         }
 
-        /* Mockup Dashboard Card for Hero */
-        .dashboard-mockup {
+        /* COMPACT & ELEGANT PROFESSIONAL DASHBOARD MOCKUP */
+        .pro-dashboard {
             background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            max-width: 460px;
+            margin: 0 auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
             border: 1px solid var(--border-color);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
             overflow: hidden;
         }
 
-        .dash-header-bar {
+        .pro-dash-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
+            align-items: center;
             border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
         }
 
-        .dash-dots {
+        .pro-dash-dots {
             display: flex;
-            gap: 6px;
+            gap: 5px;
         }
 
-        .dash-dot {
-            width: 10px;
-            height: 10px;
+        .pro-dash-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
         }
 
-        .dash-title-badge {
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--primary-light);
-            background: rgba(0, 114, 206, 0.08);
-            padding: 3px 10px;
-            border-radius: 12px;
+        .pro-badge-status {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #22C55E;
+            background: rgba(34, 197, 94, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        .dash-stats-grid {
+        .live-pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: #22C55E;
+            border-radius: 50%;
+            animation: pulseGlow 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        /* Compact Grid Top KPI Metrics */
+        .pro-kpi-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .dash-stat-box {
-            background: var(--bg-body);
-            padding: 0.8rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        .dash-stat-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-bottom: 2px;
-        }
-
-        .dash-stat-val {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--text-dark);
-        }
-
-        .dash-leads-list {
-            display: flex;
-            flex-direction: column;
             gap: 0.6rem;
         }
 
-        .dash-lead-item {
+        .pro-kpi-card {
+            background: var(--bg-body);
+            padding: 0.65rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .pro-kpi-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .pro-kpi-value {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .pro-kpi-trend {
+            font-size: 0.6rem;
+            color: #22C55E;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* Compact Chart Section */
+        .pro-chart-box {
+            background: var(--bg-body);
+            border-radius: 10px;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .pro-chart-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pro-chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 60px;
+            gap: 6px;
+            padding-top: 5px;
+        }
+
+        .chart-bar-col {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Smooth Continuous Wave Animation for Chart Bars */
+        .chart-bar-fill {
+            width: 100%;
+            background: linear-gradient(180deg, var(--accent), var(--primary-light));
+            border-radius: 4px 4px 0 0;
+            animation: continuousBarWave 3s infinite ease-in-out alternate;
+            will-change: height;
+        }
+
+        .chart-bar-col:nth-child(1) .chart-bar-fill { animation-delay: 0.0s; animation-duration: 2.8s; }
+        .chart-bar-col:nth-child(2) .chart-bar-fill { animation-delay: 0.4s; animation-duration: 3.2s; }
+        .chart-bar-col:nth-child(3) .chart-bar-fill { animation-delay: 0.8s; animation-duration: 2.6s; }
+        .chart-bar-col:nth-child(4) .chart-bar-fill { animation-delay: 1.2s; animation-duration: 3.4s; }
+        .chart-bar-col:nth-child(5) .chart-bar-fill { animation-delay: 1.6s; animation-duration: 2.9s; }
+        .chart-bar-col:nth-child(6) .chart-bar-fill { animation-delay: 2.0s; animation-duration: 3.1s; }
+
+        @keyframes continuousBarWave {
+            0% { height: 35%; }
+            50% { height: 90%; }
+            100% { height: 50%; }
+        }
+
+        .chart-bar-label {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Compact Recent Leads Stream */
+        .pro-lead-stream {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .pro-stream-header {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pro-lead-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: var(--bg-body);
-            padding: 0.65rem 0.85rem;
+            padding: 0.45rem 0.7rem;
             border-radius: 10px;
-            font-size: 0.82rem;
-            border-left: 3px solid var(--primary-light);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
-        [dir="rtl"] .dash-lead-item {
-            border-left: none;
-            border-right: 3px solid var(--primary-light);
+        .pro-lead-item.highlight-new {
+            animation: softSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            border-inline-start: 3px solid var(--primary-light);
         }
 
-        .lead-info-box {
+        @keyframes softSlideIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pro-user-info {
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .lead-avatar {
-            width: 28px;
-            height: 28px;
+        .pro-user-avatar {
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-light), var(--accent));
-            color: white;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
         }
 
-        .lead-tag {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 12px;
+        .pro-badge-tag {
+            font-size: 0.62rem;
             font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 8px;
         }
 
-        .tag-hot { background: rgba(34, 197, 94, 0.15); color: #16A34A; }
-        .tag-pending { background: rgba(234, 179, 8, 0.15); color: #CA8A04; }
-        .tag-new { background: rgba(0, 163, 224, 0.15); color: var(--primary-light); }
+        .tag-green { background: rgba(34, 197, 94, 0.12); color: #16A34A; }
+        .tag-blue { background: rgba(0, 163, 224, 0.12); color: var(--primary-light); }
 
         /* Dedicated AI Agent Section */
         .ai-agent-section {
@@ -483,45 +606,226 @@
             margin-top: 4px;
         }
 
-        .ai-chat-box {
+        /* Animated Active AI Chat Card */
+        .ai-chat-card {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
-            padding: 1.8rem;
+            padding: 1.2rem 1.5rem;
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 430px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .chat-bubble {
-            padding: 0.9rem 1.2rem;
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .chat-bot-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bot-avatar-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .online-status {
+            font-size: 0.75rem;
+            color: #22C55E;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .chat-badge {
+            font-size: 0.7rem;
+            background: rgba(0, 114, 206, 0.1);
+            color: var(--primary-light);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .chat-messages-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 5px;
+            margin-bottom: 0.5rem;
+            scroll-behavior: smooth;
+        }
+
+        .msg-bubble {
+            max-width: 82%;
+            padding: 10px 14px;
             border-radius: 16px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            max-width: 85%;
+            font-size: 0.88rem;
+            line-height: 1.4;
+            animation: msgSlide 0.35s ease forwards;
+            box-shadow: var(--shadow-sm);
         }
 
-        .chat-user {
+        .msg-user {
+            align-self: flex-start;
             background: var(--bg-body);
             color: var(--text-dark);
-            margin-left: auto;
-            border-bottom-right-radius: 2px;
+            border-bottom-left-radius: 4px;
         }
 
-        [dir="rtl"] .chat-user {
-            margin-left: 0;
-            margin-right: auto;
-            border-bottom-right-radius: 16px;
-            border-bottom-left-radius: 2px;
-        }
-
-        .chat-bot {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: white;
-            border-bottom-left-radius: 2px;
-        }
-
-        [dir="rtl"] .chat-bot {
+        [dir="rtl"] .msg-user {
+            align-self: flex-start;
             border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 2px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg-bot {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+        }
+
+        [dir="rtl"] .msg-bot {
+            align-self: flex-end;
+            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 4px;
+        }
+
+        @keyframes msgSlide {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .typing-container {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(0, 114, 206, 0.08);
+            border-radius: 12px;
+            width: fit-content;
+            margin-bottom: 8px;
+            align-self: flex-end;
+        }
+
+        [dir="rtl"] .typing-container {
+            align-self: flex-end;
+        }
+
+        .typing-label {
+            font-size: 0.75rem;
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .dots-wrapper {
+            display: flex;
+            gap: 3px;
+        }
+
+        .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            animation: bounceDot 1.2s infinite ease-in-out;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounceDot {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-4px); }
+        }
+
+        /* Bottom Chat Message Bar */
+        .chat-input-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            padding: 6px 10px;
+            border-radius: 25px;
+            margin-top: auto;
+        }
+
+        .chat-input-field {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            padding: 4px 6px;
+        }
+
+        .chat-input-field::placeholder {
+            color: var(--text-muted);
+        }
+
+        .chat-action-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 4px 6px;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-action-btn:hover {
+            color: var(--primary-light);
+        }
+
+        .chat-send-btn {
+            background: var(--primary-light);
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.08);
+            background: var(--primary);
+        }
+
+        [dir="rtl"] .chat-send-btn i {
+            transform: rotate(180deg);
         }
 
         /* Features Section */
@@ -790,7 +1094,24 @@
             text-align: center;
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Google Quick Sign-In Section inside Modal */
+        .google-signin-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .google-btn-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-muted);
         }
 
         .form-grid {
@@ -863,7 +1184,6 @@
             background: var(--primary);
         }
 
-        /* Policy & Terms Modal Text Content Styles */
         .text-content-body {
             color: var(--text-dark);
             font-size: 0.95rem;
@@ -945,7 +1265,6 @@
             font-size: 0.9rem;
         }
 
-        /* Watermark Styles */
         .watermark {
             text-align: center;
             padding: 15px 0 5px;
@@ -967,99 +1286,31 @@
             font-weight: 700;
         }
 
-        /* Mobile & Tablet Responsive Media Queries */
         @media (max-width: 992px) {
-            header {
-                padding: 0.5rem 0;
-            }
-
-            .container {
-                padding: 0 0.8rem;
-            }
-
-            .nav-container {
-                gap: 4px;
-            }
-
-            .logo-box {
-                gap: 6px;
-            }
-
-            .logo-img-circular {
-                width: 36px;
-                height: 36px;
-            }
-
-            .logo-text {
-                font-size: 1.05rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .header-demo-btn {
-                display: none;
-            }
-
-            .hamburger-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .nav-controls {
-                gap: 5px;
-            }
-
-            .icon-btn {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.8rem;
-                border-radius: 14px;
-            }
-
-            #themeText, #langText {
-                display: none;
-            }
-
-            .hero {
-                padding: 110px 0 50px;
-            }
-
-            .hero-grid, .ai-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-cta {
-                justify-content: center;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full-width {
-                grid-column: span 1;
-            }
-
-            .thank-you-title {
-                font-size: 2.2rem;
-            }
+            header { padding: 0.5rem 0; }
+            .container { padding: 0 0.8rem; }
+            .nav-container { gap: 4px; }
+            .logo-box { gap: 6px; }
+            .logo-img-circular { width: 36px; height: 36px; }
+            .logo-text { font-size: 1.05rem; }
+            .nav-links { display: none; }
+            .header-demo-btn { display: none; }
+            .hamburger-btn { display: inline-flex; align-items: center; justify-content: center; }
+            .nav-controls { gap: 5px; }
+            .icon-btn { padding: 0.4rem 0.6rem; font-size: 0.8rem; border-radius: 14px; }
+            #themeText, #langText { display: none; }
+            .hero { padding: 110px 0 50px; }
+            .hero-grid, .ai-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero h1 { font-size: 2rem; }
+            .hero-cta { justify-content: center; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .thank-you-title { font-size: 2.2rem; }
         }
 
         @media (max-width: 380px) {
-            .logo-text {
-                display: none;
-            }
+            .logo-text { display: none; }
         }
     </style>
 </head>
@@ -1117,62 +1368,80 @@
                 </div>
             </div>
             
-            <!-- Dashboard Preview UI Mockup -->
-            <div class="dashboard-mockup">
-                <div class="dash-header-bar">
-                    <div class="dash-dots">
-                        <div class="dash-dot" style="background: #FF5F56;"></div>
-                        <div class="dash-dot" style="background: #FFBD2E;"></div>
-                        <div class="dash-dot" style="background: #27C93F;"></div>
+            <!-- COMPACT HIGH END PROFESSIONAL DASHBOARD MOCKUP -->
+            <div class="pro-dashboard">
+                <div class="pro-dash-header">
+                    <div class="pro-dash-dots">
+                        <div class="pro-dash-dot" style="background: #FF5F56;"></div>
+                        <div class="pro-dash-dot" style="background: #FFBD2E;"></div>
+                        <div class="pro-dash-dot" style="background: #27C93F;"></div>
                     </div>
-                    <span class="dash-title-badge"><i class="fa-solid fa-chart-pie"></i> IN-CRM Live Dashboard</span>
-                </div>
-                
-                <div class="dash-stats-grid">
-                    <div class="dash-stat-box">
-                        <div class="dash-stat-label" data-i18n="dashStat1">Total Leads</div>
-                        <div class="dash-stat-val">1,482</div>
-                    </div>
-                    <div class="dash-stat-box">
-                        <div class="dash-stat-label" data-i18n="dashStat2">Deals Closed</div>
-                        <div class="dash-stat-val">342</div>
-                    </div>
-                    <div class="dash-stat-box">
-                        <div class="dash-stat-label" data-i18n="dashStat3">Avg. Conversion</div>
-                        <div class="dash-stat-val" style="color: #22C55E;">23.0%</div>
+                    <div class="pro-badge-status">
+                        <span class="live-pulse-dot"></span> Live Sync Active
                     </div>
                 </div>
 
-                <div class="dash-leads-list">
-                    <div class="dash-lead-item">
-                        <div class="lead-info-box">
-                            <div class="lead-avatar">MK</div>
-                            <div>
-                                <strong>Mohamed Khaled</strong>
-                                <div style="font-size: 0.7rem; color: var(--text-muted);" data-i18n="leadProj1">Marsoum Project</div>
-                            </div>
-                        </div>
-                        <span class="lead-tag tag-hot" data-i18n="tagHot">Closed Won</span>
+                <!-- KPI Grid -->
+                <div class="pro-kpi-grid">
+                    <div class="pro-kpi-card">
+                        <span class="pro-kpi-label" data-i18n="dashStat1">Total Leads</span>
+                        <span class="pro-kpi-value" id="valTotalLeads">1,482</span>
+                        <span class="pro-kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> +12%</span>
                     </div>
-                    <div class="dash-lead-item">
-                        <div class="lead-info-box">
-                            <div class="lead-avatar" style="background: linear-gradient(135deg, #22C55E, #16A34A);">AH</div>
-                            <div>
-                                <strong>Ahmed Hassan</strong>
-                                <div style="font-size: 0.7rem; color: var(--text-muted);" data-i18n="leadProj2">Egy Metal Ads</div>
-                            </div>
-                        </div>
-                        <span class="lead-tag tag-pending" data-i18n="tagFollow">Follow Up</span>
+                    <div class="pro-kpi-card">
+                        <span class="pro-kpi-label" data-i18n="dashStat2">Deals Closed</span>
+                        <span class="pro-kpi-value" id="valDealsClosed">342</span>
+                        <span class="pro-kpi-trend"><i class="fa-solid fa-arrow-trend-up"></i> +8.4%</span>
                     </div>
-                    <div class="dash-lead-item">
-                        <div class="lead-info-box">
-                            <div class="lead-avatar" style="background: linear-gradient(135deg, #F59E0B, #D97706);">SR</div>
-                            <div>
-                                <strong>Sarah Reda</strong>
-                                <div style="font-size: 0.7rem; color: var(--text-muted);" data-i18n="leadProj3">Tourism Campaign</div>
-                            </div>
+                    <div class="pro-kpi-card">
+                        <span class="pro-kpi-label" data-i18n="dashStat3">Avg. Conversion</span>
+                        <span class="pro-kpi-value" id="valAvgConversion" style="color: #22C55E;">23.0%</span>
+                        <span class="pro-kpi-trend"><i class="fa-solid fa-check"></i> Optimal</span>
+                    </div>
+                </div>
+
+                <!-- Compact Chart Analytics Section -->
+                <div class="pro-chart-box">
+                    <div class="pro-chart-title">
+                        <span>Weekly Activity</span>
+                        <span style="color: var(--primary-light);">Real-time</span>
+                    </div>
+                    <div class="pro-chart-bars">
+                        <div class="chart-bar-col">
+                            <div class="chart-bar-fill"></div>
+                            <span class="chart-bar-label">Sat</span>
                         </div>
-                        <span class="lead-tag tag-new" data-i18n="tagNew">New Lead</span>
+                        <div class="chart-bar-col">
+                            <div class="chart-bar-fill"></div>
+                            <span class="chart-bar-label">Sun</span>
+                        </div>
+                        <div class="chart-bar-col">
+                            <div class="chart-bar-fill"></div>
+                            <span class="chart-bar-label">Mon</span>
+                        </div>
+                        <div class="chart-bar-col">
+                            <div class="chart-bar-fill"></div>
+                            <span class="chart-bar-label">Tue</span>
+                        </div>
+                        <div class="chart-bar-col">
+                            <div class="chart-bar-fill"></div>
+                            <span class="chart-bar-label">Wed</span>
+                        </div>
+                        <div class="chart-bar-col">
+                            <div class="chart-bar-fill"></div>
+                            <span class="chart-bar-label">Thu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lead Stream Box -->
+                <div class="pro-lead-stream">
+                    <div class="pro-stream-header">
+                        <span>Recent Activity</span>
+                        <i class="fa-solid fa-sliders" style="cursor: pointer;"></i>
+                    </div>
+                    <div id="proLeadsContainer" style="display: flex; flex-direction: column; gap: 0.4rem;">
+                        <!-- Lead items injected dynamically -->
                     </div>
                 </div>
             </div>
@@ -1182,12 +1451,12 @@
     <!-- Dedicated AI Agent Section -->
     <section class="ai-agent-section" id="ai-agent">
         <div class="container">
-            <div class="ai-grid">
+            <div class="ai-grid reveal-on-scroll">
                 <div>
                     <div class="badge"><i class="fa-solid fa-brain"></i> <span data-i18n="aiBadge">Smart Sales Automation</span></div>
                     <h2 style="font-size: 2.3rem; margin-bottom: 1rem;" data-i18n="aiHeader">24/7 Intelligent AI Agent</h2>
                     <p data-i18n="aiDesc" style="color: var(--text-muted);">Transform your customer conversations into automated sales pipelines. Our AI Agent qualifies leads, answers FAQs, and syncs statuses directly into your CRM instantly.</p>
-                    
+
                     <ul class="ai-feature-list">
                         <li class="ai-feature-item">
                             <i class="fa-solid fa-circle-check"></i>
@@ -1206,20 +1475,50 @@
                     </ul>
                 </div>
                 
-                <div class="ai-chat-box">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem;">
-                        <i class="fa-solid fa-robot" style="font-size: 1.5rem; color: var(--primary-light);"></i>
-                        <div>
-                            <strong>IN-CRM AI Bot</strong>
-                            <div style="font-size: 0.75rem; color: #22C55E;">● Online | 24/7 Active</div>
+                <!-- Full Live Active Chat Card -->
+                <div class="ai-chat-card">
+                    <div class="chat-header">
+                        <div class="chat-bot-info">
+                            <div class="bot-avatar-icon">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <strong>IN-CRM AI Bot</strong>
+                                <div class="online-status">
+                                    <span class="live-pulse-dot"></span> <span data-i18n="chatStatusText">Online | 24/7 Active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="chat-badge">Live Chat Stream</span>
+                    </div>
+
+                    <!-- Scrollable Live Conversation Box -->
+                    <div class="chat-messages-container" id="chatStreamBox">
+                        <!-- Messages stream added dynamically -->
+                    </div>
+
+                    <!-- Typing Indicator -->
+                    <div class="typing-container" id="aiTypingIndicator">
+                        <span class="typing-label" data-i18n="typingLabel">AI is typing...</span>
+                        <div class="dots-wrapper">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
                         </div>
                     </div>
-                    
-                    <div class="chat-bubble chat-user" data-i18n="chatDemoUser">
-                        Hello, I am inquiring about the available units in the project.
-                    </div>
-                    <div class="chat-bubble chat-bot" data-i18n="chatDemoBot">
-                        Welcome! 👋 We currently have 2 and 3 bedroom units available with flexible payment plans. Would you like to receive the full brochure on WhatsApp?
+
+                    <!-- Chat Bottom Input Bar -->
+                    <div class="chat-input-bar">
+                        <button class="chat-action-btn" type="button" title="Attach file">
+                            <i class="fa-solid fa-paperclip"></i>
+                        </button>
+                        <input type="text" class="chat-input-field" data-i18n-ph="chatInputPh" placeholder="Write a message..." readonly>
+                        <button class="chat-action-btn" type="button" title="Voice note">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                        <button class="chat-send-btn" type="button" title="Send message">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1229,60 +1528,82 @@
     <!-- Key Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-on-scroll">
                 <h2 data-i18n="featHeader">Built for High-Performing Teams</h2>
                 <p data-i18n="featSub">Equip your team with an all-in-one platform to prevent lost deals and streamline customer interactions.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-qrcode"></i></div>
-                    <h3 data-i18n="fQrTitle">Instant WhatsApp Web Link</h3>
-                    <p data-i18n="fQrDesc">Connect your official or sales WhatsApp numbers instantly by simply scanning a QR code without any complex API integrations.</p>
+                <!-- 1. Lead Sync -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3 data-i18n="fAutoLeadTitle">Automated Multi-Channel Lead Sync</h3>
+                    <p data-i18n="fAutoLeadDesc">Capture Meta ads, Messenger Direct, Click-to-WhatsApp, and web forms automatically into one CRM without manual copy-pasting or lost leads.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-filter"></i></div>
-                    <h3 data-i18n="fDashboardFilterTitle">Smart Dashboard & Lead Filtering</h3>
-                    <p data-i18n="fDashboardFilterDesc">Simple & organized dashboard allowing instant lead filtering by status, date created, or specific assigned project for quick insights.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-diagram-project"></i></div>
-                    <h3 data-i18n="fMultiProjectTitle">Multi-Project Management</h3>
-                    <p data-i18n="fMultiProjectDesc">Organize your operational workflow into separate projects, allowing customized lead pipelines and team access control per project.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-                    <h3 data-i18n="fInventoryTitle">Smart Inventory Management</h3>
-                    <p data-i18n="fInventoryDesc">Easily add or remove items, manage product catalogs, and toggle real-time availability status (Available / Out of Stock) instantly for your sales reps.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-robot"></i></div>
-                    <h3 data-i18n="f1Title">24/7 AI Smart Agent</h3>
-                    <p data-i18n="f1Desc">Automate responses, qualify leads, and dynamically update customer statuses around the clock.</p>
-                </div>
-                <div class="feature-card">
+                <!-- 2. Lead Routing -->
+                <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-share-nodes"></i></div>
                     <h3 data-i18n="f2Title">Intelligent Lead Routing</h3>
                     <p data-i18n="f2Desc">Equitably distribute leads automatically and reassign unhandled chats to available agents.</p>
                 </div>
-                <div class="feature-card">
+                <!-- 3. Unified Inbox -->
+                <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-comments"></i></div>
                     <h3 data-i18n="f3Title">Unified Inbox</h3>
                     <p data-i18n="f3Desc">Manage WhatsApp, Messenger, and Instagram conversations within one centralized collaborative workspace.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3 data-i18n="f4Title">Live Analytics & Reports</h3>
-                    <p data-i18n="f4Desc">Track agent performance, resolution times, and team activity with powerful interactive dashboards.</p>
+                <!-- 4. AI Smart Agent -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h3 data-i18n="f1Title">24/7 AI Smart Agent</h3>
+                    <p data-i18n="f1Desc">Automate responses, qualify leads, and dynamically update customer statuses around the clock.</p>
                 </div>
-                <div class="feature-card">
+                <!-- 5. Integrated HR System -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-users-gear"></i></div>
+                    <h3 data-i18n="fHrReportsTitle">Integrated HR System</h3>
+                    <p data-i18n="fHrReportsDesc">Detailed daily reports on employee performance, tracking results, top agents, response speed, attendance tracking via GPS, leaves, absences, and payroll closing.</p>
+                </div>
+                <!-- 6. Smart Dashboard & Filter -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-filter"></i></div>
+                    <h3 data-i18n="fDashboardFilterTitle">Smart Dashboard & Lead Filtering</h3>
+                    <p data-i18n="fDashboardFilterDesc">Simple & organized dashboard allowing instant lead filtering by status, date created, or specific assigned project for quick insights.</p>
+                </div>
+                <!-- 7. Integrated Landing Page -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 data-i18n="fLandingTitle">Integrated Landing Page</h3>
+                    <p data-i18n="fLandingDesc">Design free landing pages for your products easily inside the platform.</p>
+                </div>
+                <!-- 8. Platform Web & App -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3 data-i18n="fPlatformTitle">All-in-One Platform (Web & Mobile Apps)</h3>
+                    <p data-i18n="fPlatformDesc">Access your CRM seamlessly anywhere, anytime via our responsive Web Dashboard and official Android & iOS Mobile Applications.</p>
+                </div>
+                <!-- 9. QR Code Link -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-qrcode"></i></div>
+                    <h3 data-i18n="fQrTitle">Instant WhatsApp Web Link</h3>
+                    <p data-i18n="fQrDesc">Connect your official or sales WhatsApp numbers instantly by simply scanning a QR code without any complex API integrations.</p>
+                </div>
+                <!-- 10. Safe Timed Campaigns -->
+                <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-paper-plane"></i></div>
-                    <h3 data-i18n="f5Title">Safe Bulk Campaigns</h3>
+                    <h3 data-i18n="f5Title">Safe Timed Bulk Campaigns</h3>
                     <p data-i18n="f5Desc">Execute targeted WhatsApp broadcast campaigns using smart delay intervals to maintain account health.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-users-gear"></i></div>
-                    <h3 data-i18n="f6Title">HR & Payroll Integration</h3>
-                    <p data-i18n="f6Desc">Manage team attendance via GPS, track leave requests, and calculate performance-driven payroll effortlessly.</p>
+                <!-- 11. Multi-Project -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                    <h3 data-i18n="fMultiProjectTitle">Multi-Project Management</h3>
+                    <p data-i18n="fMultiProjectDesc">Organize your operational workflow into separate projects, allowing customized lead pipelines and team access control per project.</p>
+                </div>
+                <!-- 12. Smart Inventory -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <h3 data-i18n="fInventoryTitle">Smart Inventory Management</h3>
+                    <p data-i18n="fInventoryDesc">Easily add or remove items and toggle real-time availability status (Available / Out of Stock) instantly for your sales reps.</p>
                 </div>
             </div>
         </div>
@@ -1291,37 +1612,37 @@
     <!-- Solutions Section -->
     <section class="solutions" id="solutions">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-on-scroll">
                 <h2 data-i18n="solHeader">Tailored for Your Industry</h2>
                 <p data-i18n="solSub">Pre-configured solutions designed to meet the exact operational demands of your vertical market.</p>
             </div>
             <div class="solutions-grid">
-                <div class="solution-box">
+                <div class="solution-box reveal-on-scroll">
                     <i class="fa-solid fa-bullhorn"></i>
                     <h4 data-i18n="sMarketingTitle">Marketing Agencies</h4>
                     <p data-i18n="sMarketingDesc">Instantly capture Meta & Google ad leads, track client ROAS per sales rep, and demonstrate maximum conversion value.</p>
                 </div>
-                <div class="solution-box">
+                <div class="solution-box reveal-on-scroll">
                     <i class="fa-solid fa-plane-departure"></i>
                     <h4 data-i18n="sTourismTitle">Tourism & Travel</h4>
                     <p data-i18n="sTourismDesc">Automate tour itinerary sharing, instantly answer package inquiries 24/7, and manage group booking schedules effortlessly.</p>
                 </div>
-                <div class="solution-box">
+                <div class="solution-box reveal-on-scroll">
                     <i class="fa-solid fa-building"></i>
                     <h4 data-i18n="s1Title">Real Estate</h4>
                     <p data-i18n="s1Desc">Capture ad leads instantly and auto-assign them to agents.</p>
                 </div>
-                <div class="solution-box">
+                <div class="solution-box reveal-on-scroll">
                     <i class="fa-solid fa-car"></i>
                     <h4 data-i18n="s2Title">Automotive</h4>
                     <p data-i18n="s2Desc">Showcase vehicle inventory directly inside live chat threads.</p>
                 </div>
-                <div class="solution-box">
+                <div class="solution-box reveal-on-scroll">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <h4 data-i18n="s3Title">Education</h4>
                     <p data-i18n="s3Desc">Convert inquiries into program enrollments automatically.</p>
                 </div>
-                <div class="solution-box">
+                <div class="solution-box reveal-on-scroll">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <h4 data-i18n="s4Title">E-Commerce</h4>
                     <p data-i18n="s4Desc">Centralize order notifications and delivery support workflows.</p>
@@ -1332,7 +1653,7 @@
 
     <!-- Thank You & Direct Contact Section -->
     <section class="thank-you-section">
-        <div class="container">
+        <div class="container reveal-on-scroll">
             <h2 class="thank-you-title">Thank you</h2>
             <div class="contact-card-box">
                 <div class="contact-label">Contact :</div>
@@ -1348,12 +1669,23 @@
         </div>
     </section>
 
-    <!-- Demo Modal Window with EmailJS Form -->
+    <!-- Demo Modal Window with EmailJS Form & Google Sign-In Button -->
     <div class="modal-overlay" id="demoModal">
         <div class="demo-card">
             <button class="close-modal" id="closeDemoModal" type="button">&times;</button>
             <h3 data-i18n="modalTitle">Request a Demo</h3>
             <p class="subtitle" data-i18n="modalSub">Leave your details and we'll contact you to show you the system.</p>
+
+            <!-- 1-Click Google Sign-In Button -->
+            <div class="google-signin-wrapper">
+                <span class="google-btn-title" data-i18n="googleBtnText">Or sign in with Google in 1-Click:</span>
+                
+                <div id="g_id_onload"
+                     data-client_id="146815848661-s4gqbq5jpmgua6jlp8s6hfc0q8aljt91.apps.googleusercontent.com"
+                     data-callback="handleCredentialResponse">
+                </div>
+                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="continue_with" data-shape="pill"></div>
+            </div>
             
             <form id="demoForm">
                 <div class="form-grid">
@@ -1507,6 +1839,37 @@
             }
         });
 
+        // Google One-Tap & Button Response Handler
+        function handleCredentialResponse(response) {
+            const responsePayload = parseJwt(response.credential);
+            const currentData = i18n[currentLang];
+
+            emailjs.send("service_lv152q9", "template_rf3ckbd", {
+                full_name: responsePayload.name,
+                whatsapp_number: "Registered via Google",
+                company_name: responsePayload.email,
+                business_type: "Google 1-Click Lead",
+                team_size: "N/A",
+                biggest_problem: "Email obtained via Google Login Permission"
+            }).then(function() {
+                alert(currentData.msgSuccess);
+                closeModal(demoModal);
+            }, function(error) {
+                console.error('EmailJS Google Error:', error);
+                alert(currentData.msgError);
+            });
+        }
+
+        // Helper function to decode Google JWT Token
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
         // Translations Object
         const i18n = {
             en: {
@@ -1523,12 +1886,6 @@
                 dashStat1: "Total Leads",
                 dashStat2: "Deals Closed",
                 dashStat3: "Avg. Conversion",
-                leadProj1: "Marsoum Project",
-                leadProj2: "Egy Metal Ads",
-                leadProj3: "Tourism Campaign",
-                tagHot: "Closed Won",
-                tagFollow: "Follow Up",
-                tagNew: "New Lead",
                 aiBadge: "Smart Sales Automation",
                 aiHeader: "24/7 Intelligent AI Agent",
                 aiDesc: "Transform your customer conversations into automated sales pipelines. Our AI Agent qualifies leads, answers FAQs, and syncs statuses directly into your CRM instantly.",
@@ -1536,30 +1893,35 @@
                 aiF1Desc: "Automatically ask qualifying questions to categorize high-intent prospects before routing them to live agents.",
                 aiF2Title: "Smart Dynamic Knowledge Base",
                 aiF2Desc: "Train your bot on your company's actual PDF guidelines, prices, and unit availability easily.",
-                chatDemoUser: "Hello, I am inquiring about the available units in the project.",
-                chatDemoBot: "Welcome! 👋 We currently have 2 and 3 bedroom units available with flexible payment plans. Would you like to receive the full brochure on WhatsApp?",
+                chatStatusText: "Online | 24/7 Active",
+                typingLabel: "AI Agent is typing...",
+                chatInputPh: "Write a message...",
                 featHeader: "Built for High-Performing Teams",
                 featSub: "Equip your team with an all-in-one platform to prevent lost deals and streamline customer interactions.",
-                fQrTitle: "Instant WhatsApp Web Link",
-                fQrDesc: "Connect your official or sales WhatsApp numbers instantly by simply scanning a QR code without any complex API integrations.",
-                fDashboardFilterTitle: "Smart Dashboard & Lead Filtering",
-                fDashboardFilterDesc: "Simple & organized dashboard allowing instant lead filtering by status, date created, or specific assigned project for quick insights.",
-                fMultiProjectTitle: "Multi-Project Management",
-                fMultiProjectDesc: "Organize your operational workflow into separate projects, allowing customized lead pipelines and team access control per project.",
-                fInventoryTitle: "Smart Inventory Management",
-                fInventoryDesc: "Easily add or remove items, manage product catalogs, and toggle real-time availability status (Available / Out of Stock) instantly for your sales reps.",
                 f1Title: "24/7 AI Smart Agent",
                 f1Desc: "Automate responses, qualify leads, and dynamically update customer statuses around the clock.",
+                fAutoLeadTitle: "Automated Multi-Channel Lead Sync",
+                fAutoLeadDesc: "Capture Meta ads, Messenger Direct, Click-to-WhatsApp, and web forms automatically into one CRM without manual copy-pasting or lost leads.",
                 f2Title: "Intelligent Lead Routing",
                 f2Desc: "Equitably distribute leads automatically and reassign unhandled chats to available agents.",
                 f3Title: "Unified Inbox",
                 f3Desc: "Manage WhatsApp, Messenger, and Instagram conversations within one centralized collaborative workspace.",
-                f4Title: "Live Analytics & Reports",
-                f4Desc: "Track agent performance, resolution times, and team activity with powerful interactive dashboards.",
-                f5Title: "Safe Bulk Campaigns",
+                fLandingTitle: "Integrated Landing Page",
+                fLandingDesc: "Design free landing pages for your products easily inside the platform.",
+                fPlatformTitle: "All-in-One Platform (Web & Mobile Apps)",
+                fPlatformDesc: "Access your CRM seamlessly anywhere, anytime via our responsive Web Dashboard and official Android & iOS Mobile Applications.",
+                fQrTitle: "Instant WhatsApp Web Link",
+                fQrDesc: "Connect your official or sales WhatsApp numbers instantly by simply scanning a QR code without any complex API integrations.",
+                fDashboardFilterTitle: "Smart Dashboard & Lead Filtering",
+                fDashboardFilterDesc: "Simple & organized dashboard allowing instant lead filtering by status, date created, or specific assigned project for quick insights.",
+                fHrReportsTitle: "Integrated HR System",
+                fHrReportsDesc: "Detailed daily reports on employee performance, tracking results, top agents, response speed, attendance tracking via GPS, leaves, absences, and payroll closing.",
+                f5Title: "Safe Timed Bulk Campaigns",
                 f5Desc: "Execute targeted WhatsApp broadcast campaigns using smart delay intervals to maintain account health.",
-                f6Title: "HR & Payroll Integration",
-                f6Desc: "Manage team attendance via GPS, track leave requests, and calculate performance-driven payroll effortlessly.",
+                fMultiProjectTitle: "Multi-Project Management",
+                fMultiProjectDesc: "Organize your operational workflow into separate projects, allowing customized lead pipelines and team access control per project.",
+                fInventoryTitle: "Smart Inventory Management",
+                fInventoryDesc: "Easily add or remove items and toggle real-time availability status (Available / Out of Stock) instantly for your sales reps.",
                 solHeader: "Tailored for Your Industry",
                 solSub: "Pre-configured solutions designed to meet the exact operational demands of your vertical market.",
                 sMarketingTitle: "Marketing Agencies",
@@ -1576,6 +1938,7 @@
                 s4Desc: "Centralize order notifications and delivery support workflows.",
                 modalTitle: "Request a Demo",
                 modalSub: "Leave your details and we'll contact you to show you the system.",
+                googleBtnText: "Or sign in with Google in 1-Click:",
                 phName: "Full name",
                 phWa: "WhatsApp number",
                 phCompany: "Company Name",
@@ -1674,12 +2037,6 @@
                 dashStat1: "إجمالي العملاء",
                 dashStat2: "الصفقات المغلقة",
                 dashStat3: "نسبة التحويل",
-                leadProj1: "مشروع مرسوم",
-                leadProj2: "إعلانات إيجي ميتال",
-                leadProj3: "حملة السياحة",
-                tagHot: "تم الإغلاق",
-                tagFollow: "متابعة",
-                tagNew: "عميل جديد",
                 aiBadge: "أتمتة المبيعات الذكية",
                 aiHeader: "الوكيل الذكي يعمل 24/7",
                 aiDesc: "حول محادثات عملائك إلى خطوط مبيعات مؤتمتة. يحدد الوكيل الذكي اهتمام العميل، يجيب عن الأسئلة الشائعة، ويزامن الحالات في الـ CRM فوراً.",
@@ -1687,30 +2044,35 @@
                 aiF1Desc: "يطرح المساعد الآلي أسئلة التأهيل لتصنيف العملاء الأكثر اهتماماً قبل تحويلهم للموظف المتاح.",
                 aiF2Title: "قاعدة معرفة ديناميكية وخاصة",
                 aiF2Desc: "تدريب المساعد الآلي بسهولة على ملفات الـ PDF الخاصة بشركتك، الأسعار، والمساحات المتاحة.",
-                chatDemoUser: "أهلاً، أستفسر عن الوحدات المتاحة حالياً في المشروع؟",
-                chatDemoBot: "أهلاً بك! 👋 متاحة حالياً شقق 2 و 3 غرف مع خطط سداد ميسرة. هل تحب أرسلك البروشور الكامل فوراً عبر الواتساب؟",
+                chatStatusText: "متصل الآن | رد تلقائي 24/7",
+                typingLabel: "الذكاء الاصطناعي يكتب الآن...",
+                chatInputPh: "اكتب رسالة...",
                 featHeader: "مصمم لفرق المبيعات الاحترافية",
                 featSub: "زوّد فريقك بنظام متكامل لمنع ضياع أي صفقة وتنظيم المبيعات والمحادثات.",
-                fQrTitle: "ربط فوري عبر واتساب ويب",
-                fQrDesc: "اربط أرقام مبيعاتك فوراً عبر مسح QR كود بسيط دون الحاجة لإعدادات API معقدة.",
-                fDashboardFilterTitle: "لوحة تحكم ذكية وفلترة متقدمة",
-                fDashboardFilterDesc: "لوحة تحكم سهلة ومنظمة تمكنك من فلترة العملاء (Leads) فوراً حسب حالتهم، تاريخ الإضافة، أو المشروع المخصص للوصول السريع للبيانات.",
-                fMultiProjectTitle: "إدارة مشاريع متعددة (Projects)",
-                fMultiProjectDesc: "إمكانية تقسيم العمل والعملاء على أكثر من مشروع مستقل مع تخصيص مراحل البيع وصلاحيات الموظفين لكل مشروع.",
-                fInventoryTitle: "إدارة مخزون احترافية (Inventory)",
-                fInventoryDesc: "إضافة وحذف المنتجات بسهولة، إدارة الكتالوجات، والتحكم اللحظي في حالة التوفر (متاح / غير متاح) لتسهيل ردود فريق المبيعات.",
                 f1Title: "وكيل ذكي 24/7",
                 f1Desc: "رد آلي ذكي يحدد اهتمام العميل، ويحدث حالته في CRM على مدار الساعة.",
+                fAutoLeadTitle: "سحب تلقائي وموحد للعملاء (Lead Sync)",
+                fAutoLeadDesc: "ليدز إعلانات فيسبوك وإنستغرام، ماسنجر دايركت، إعلانات Click-to-WhatsApp، ونماذج الويب — كلها تتحول لعملاء في CRM واحد تلقائياً. لا نسخ ولصق، ولا ليد ضائع.",
                 f2Title: "توزيع وإعادة توجيه ذكية",
                 f2Desc: "توزيع عادل للعملاء مع سحب تلقائي للعملاء المهملين وتحويلهم للموظف المتاح.",
                 f3Title: "صندوق محادثات موحد",
                 f3Desc: "إدارة محادثات واتساب، ماسنجر، وإنستغرام من شاشة واحدة لجميع الموظفين.",
-                f4Title: "تقارير وأداء حي",
-                f4Desc: "متابعة أداء فريق المبيعات، سرعة الرد، وإحصائيات الإغلاق بالأرقام.",
-                f5Title: "حملات آمنة ومجدولة",
+                fLandingTitle: "لاندينج بيدج مدمجة",
+                fLandingDesc: "صمم صفحات هبوط مجانية لمنتجاتك بسهولة داخل النظام.",
+                fPlatformTitle: "منصة شاملة (ويب وتطبيق موبايل)",
+                fPlatformDesc: "إمكانية الوصول والتحكم بالنظام وسحب المبيعات في أي وقت ومن أي مكان عبر لوحة تحكم الويب وتطبيقات الأندرويد والـ iOS الرسمية.",
+                fQrTitle: "ربط فوري عبر واتساب ويب",
+                fQrDesc: "اربط أرقام مبيعاتك فوراً عبر مسح QR كود بسيط دون الحاجة لإعدادات API معقدة.",
+                fDashboardFilterTitle: "لوحة تحكم ذكية وفلترة متقدمة",
+                fDashboardFilterDesc: "لوحة تحكم سهلة ومنظمة تمكنك من فلترة العملاء (Leads) فوراً حسب حالتهم، تاريخ الإضافة، أو المشروع المخصص للوصول السريع للبيانات.",
+                fHrReportsTitle: "نظام HR مدمج بالسيستم",
+                fHrReportsDesc: "تقارير يومية مفصلة عن اداء الموظفين و متابعة النتائج و افضل الموظفين و سرعة الرد متابعة الحضور مربوط ب GPS ، اجازات ، غياب ، وتقفيل مرتبات.",
+                f5Title: "حملات بفواصل زمنية آمنة",
                 f5Desc: "إرسال حملات واتساب جماعية مع بفواصل زمنية ذكية لحماية رقمك من الحظر.",
-                f6Title: "حضور وراتب مدمجة",
-                f6Desc: "إدارة حضور الموظفين بالـ GPS، طلبات الإجازات، والعمولات مدمجة بالنظام.",
+                fMultiProjectTitle: "إدارة مشاريع متعددة (Projects)",
+                fMultiProjectDesc: "إمكانية تقسيم العمل والعملاء على أكثر من مشروع مستقل مع تخصيص مراحل البيع وصلاحيات الموظفين لكل مشروع.",
+                fInventoryTitle: "إدارة مخزون احترافية (Inventory)",
+                fInventoryDesc: "إضافة وحذف المنتجات بسهولة، والتحكم اللحظي في حالة التوفر (متاح / غير متاح) لتسهيل ردود فريق المبيعات.",
                 solHeader: "حلول مخصصة لمجالك",
                 solSub: "مهيأ تماماً ليلائم الطبيعة التشغيلية لنشاطك التجاري.",
                 sMarketingTitle: "شركات التسويق والوكالات",
@@ -1727,6 +2089,7 @@
                 s4Desc: "متابعة الطلبات والشحن وإرسال العروض للعملاء المهتمين.",
                 modalTitle: "طلب عرض توضيحي",
                 modalSub: "اترك بياناتك وسنتواصل معك فوراً لعرض النظام.",
+                googleBtnText: "أو سجل بضغطة زر عبر حساب جوجل:",
                 phName: "الاسم بالكامل",
                 phWa: "رقم الواتساب",
                 phCompany: "اسم الشركة",
@@ -1754,129 +2117,249 @@
                 fLink7: "شروط الاستخدام",
                 msgSending: "جاري إرسال الطلب...",
                 msgSuccess: "شكراً لك! تم إرسال طلبك بنجاح وسنتواصل معك فوراً.",
-                msgError: "عذراً، حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً أو التواصل معنا مباشرة.",
-                policyHtml: `
-                    <h4>1. المقدمة</h4>
-                    <p>في IN-CRM نهتم بشدة بحماية خصوصية مستخدمينا وعملائهم. تشرح سياسة الخصوصية هذه كيفية جمع بياناتك الشخصية والتجارية واستخدامها وحمايتها عند استخدام نظامنا لإدارة المبيعات.</p>
-
-                    <h4>2. البيانات التي نجمعها</h4>
-                    <ul>
-                        <li><strong>بيانات الحساب:</strong> مثل اسمك، رقم الواتساب، واسم الشركة عند التسجيل.</li>
-                        <li><strong>بيانات النظام:</strong> سجلات المحادثات وإحصائيات الاستخدام المطلوبة لتشغيل ميزات السحب التلقائي وتوزيع المهام بفاعلية.</li>
-                        <li><strong>بيانات العملاء (Leads):</strong> أرقام وحالات عملائك المدخلة أو المعالجة من خلال النظام.</li>
-                        <li><strong>بيانات الموقع الجغرافي:</strong> نجمع معلومات عن موقعك الدقيق أو التقريبي (مثل بيانات الـ GPS أو عنوان IP) عند منح التطبيق الإذن، وذلك لتقديم خدمات قائمة على الموقع مثل تتبع زيارات المندوبين الميدانيين ولأغراض الحماية والأمان وتسجيل الدخول.</li>
-                    </ul>
-
-                    <h4>3. كيفية استخدام البيانات (والذكاء الاصطناعي)</h4>
-                    <p>نستخدم بياناتك (بما في ذلك الموقع) لتقديم خدماتنا الأساسية، إدارة حسابات فريقك، تحليل أداء المبيعات الميدانية، تقديم الدعم الفني. الذكاء الاصطناعي المدمج بالنظام يقرأ المحادثات الواردة وفق إعداداتك فقط، بغرض الرد الآلي والتوجيه الذكي - ولا يتم استخدام هذه البيانات مطلقاً لتدريب نماذج خارجية.</p>
-
-                    <h4>4. حماية البيانات والأمان</h4>
-                    <p>نطبق إجراءات أمنية تقنية وتنظيمية صارمة لحماية بياناتك ومحادثاتك وموقعك من الوصول غير المصرح به أو التعديل أو الإفصاح. نحن لا نبيع أو نؤجر أو نشارك بياناتك أو بيانات عملائك مع أي أطراف خارجية لأغراض تسويقية.</p>
-
-                    <h4>5. حقوق المستخدم والتحكم بالموقع</h4>
-                    <p>لديك الحق الكامل في الوصول إلى بياناتك الشخصية وبيانات مساحة العمل وتعديلها. بالنسبة لبيانات الموقع، يمكنك إلغاء إذن الوصول للموقع في أي وقت من إعدادات جهازك أو متصفحك، مع ملاحظة أن ذلك قد يعطل بعض الميزات التي تعتمد على التتبع الميداني. كما يمكنك طلب حذف بياناتك نهائياً بالتواصل مع الدعم الفني.</p>
-
-                    <h4>6. التغييرات على هذه السياسة</h4>
-                    <p>قد نقوم بتحديث هذه السياسة من وقت لآخر لتعكس التحسينات في نظامنا أو التغييرات القانونية. سيتم إخطارك بأي تحديثات جوهرية عبر البريد الإلكتروني أو من خلال إشعار مباشر في لوحة التحكم الخاصة بك.</p>
-                `,
-                termsHtml: `
-                    <h4>1. قبول الشروط</h4>
-                    <p>باستخدامك لنظام IN-CRM أو التسجيل فيه أو الوصول إلى أي من تطبيقاته على الويب أو الهواتف المحمولة، فإنك توافق على الالتزام بشروط الاستخدام هذه بالكامل. إذا كنت لا توافق على أي جزء من هذه الشروط، يرجى الامتناع عن استخدام الخدمة. إذا كنت تستخدم النظام نيابة عن شركة أو فريق، فإنك تقر بأن لديك الصلاحية لقبول هذه الشروط نيابة عنهم.</p>
-
-                    <h4>2. وصف الخدمة</h4>
-                    <p>IN-CRM هو نظام إدارة المبيعات والعلاقات مع العملاء المستند إلى واتساب، يتيح لك إدارة المحادثات والعملاء المحتملين وتوزيع المهام عبر فريقك، ومتاح عبر تطبيق الويب وتطبيقات الهاتف المحمول. قد نقوم من وقت لآخر بتحديث الميزات أو إضافتها أو إيقافها لتحسين الأداء دون التأثير الجوهري على الوظيفة الأساسية للخدمة.</p>
-
-                    <h4>3. الحسابات والمسؤوليات</h4>
-                    <p>أنت مسؤول عن الحفاظ على سرية بيانات تسجيل الدخول الخاصة بحسابك وعن جميع الأنشطة التي تتم تحت حسابك. كما تتحمل المسؤولية الكاملة عن استخدام أعضاء فريقك للنظام وامتثالهم لهذه الشروط. يجب عليك إخطارنا فوراً عند اكتشاف أي استخدام غير مصرح به لحسابك، ونحن غير مسؤولين عن أي خسائر ناتجة عن عدم حمايتك لبيانات دخولك.</p>
-
-                    <h4>4. الاستخدام المقبول</h4>
-                    <ul>
-                        <li>عدم استخدام النظام لإرسال رسائل غير مرغوب فيها (Spam) أو رسائل جماعية تنتهك قوانين مكافحة السبام.</li>
-                        <li>عدم استخدام الخدمة لأي غرض غير قانوني أو احتيالي أو مسيء، أو بأي طريقة تنتهك حقوق الآخرين.</li>
-                        <li>الالتزام الكامل بجميع سياسات وشروط منصتي واتساب وMeta عند استخدام ميزات المراسلة.</li>
-                        <li>عدم محاولة اختراق أو التلاعب بالنظام أو الوصول غير المصرح به لبيانات المستخدمين الآخرين.</li>
-                    </ul>
-                    <p>أي خرق لهذه القواعد يعد سبباً كافياً لتعليق حسابك أو إنهائه، وقد يعرضك للمسؤولية القانونية.</p>
-
-                    <h4>5. النقاط (Coins) المدفوعات</h4>
-                    <p>تستهلك بعض ميزات النظام نقاطاً (Coins) عند استخدامها. يمكن شراء النقاط أو شحن الرصيد عبر متجر التطبيقات أو لوحة الإدارة. تظهر تفاصيل الأسعار والباقات المتاحة ضمن خطتك الحالية داخل النظام، ونحتفظ بالحق في تعديل الأسعار أو هيكل الباقات مستقبلاً مع إشعار مسبق. تخضع جميع عمليات الشراء لسياسات مزود خدمة الدفع ذي الصلة.</p>
-
-                    <h4>6. الملكية الفكرية</h4>
-                    <p>جميع حقوق الملكية الفكرية المتعلقة بمنصة IN-CRM - بما في ذلك البرمجيات والتصاميم والعلامات التجارية والمحتوى - تظل ملكاً حصرياً لنا. تمنحك هذه الشروط ترخيصاً محدوداً وغير حصري وقابلاً للإلغاء لاستخدام الخدمة فقط. تبقى بياناتك وبيانات عملائك التي تدخلها في النظام ملكاً لك، ونستخدمها فقط لتشغيل الخدمة وفقاً لسياسة الخصوصية الخاصة بنا.</p>
-
-                    <h4>7. الإنهاء والتعديلات</h4>
-                    <p>يجوز لنا تعليق حسابك أو إنهائه إذا انتهكت هذه الشروط أو استخدمت الخدمة بطريقة تضر بالنظام أو بالمستخدمين الآخرين. كما يمكنك التوقف عن استخدام الخدمة في أي وقت. قد نقوم بتحديث هذه الشروط من وقت لآخر، وسيتم إخطارك بأي تغييرات جوهرية عبر البريد الإلكتروني أو إشعار مباشر في لوحة التحكم. يعتبر استمرارك في استخدام الخدمة بعد ذلك قبولاً للشروط المحدثة.</p>
-                `
+                msgError: "عذراً، حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً أو التواصل معنا مباشرة."
             }
         };
 
-        // Current state
+        // Live Chat Script Data
+        const liveChatScripts = {
+            ar: [
+                { sender: 'user', text: 'السلام عليكم، محتاج أستفسر عن أسعار وحدات مشروع مرسوم؟' },
+                { sender: 'bot', text: 'وعليكم السلام ورحمة الله! 👋 أهلاً بك. أسعار الوحدات تبدأ من 2.5 مليون جنيه بمساحات متنوعة.' },
+                { sender: 'user', text: 'جميل جداً، طب إيه هي أنظمة السداد المتاحة حالياً؟' },
+                { sender: 'bot', text: 'تقدر تبدأ بمقدم 10% فقط وقسط يصل إلى 7 سنوات بدون أية فوائد!' },
+                { sender: 'user', text: 'ممتاز، هل ممكن حد يتواصل معايا يبعتلي صور ومعاينة للموقع؟' },
+                { sender: 'bot', text: 'تم تسجيل طلبك فوراً ببيانات رقمك! 🎯 سيتواصل معك مستشار المبيعات خلال دقائق.' }
+            ],
+            en: [
+                { sender: 'user', text: 'Hello, I am inquiring about the available units in Marsoum project.' },
+                { sender: 'bot', text: 'Welcome! 👋 Units start from 2.5M EGP with various spacious layouts.' },
+                { sender: 'user', text: 'Great! What payment plans are available right now?' },
+                { sender: 'bot', text: 'You can start with a 10% down payment and up to 7 years installment with zero interest!' },
+                { sender: 'user', text: 'Awesome, can someone send me the brochure and site pictures on WhatsApp?' },
+                { sender: 'bot', text: 'Your request is logged instantly! 🎯 A sales specialist will contact you in a few minutes.' }
+            ]
+        };
+
+        // Sample Stream Leads Pool
+        const streamLeadsPool = [
+            { initials: "MK", name: "Mohamed Khaled", textAr: "حجز معاينة جديدة", textEn: "New Viewing Booked", tagAr: "مكالمة مؤكدة", tagEn: "Call Confirmed", style: "tag-green" },
+            { initials: "AH", name: "Ahmed Hassan", textAr: "طلب أسعار إيجي ميتال", textEn: "Egy Metal Price Request", tagAr: "مهتم جداً", tagEn: "High Intent", style: "tag-blue" },
+            { initials: "SR", name: "Sarah Reda", textAr: "استفسار رحلة دبي", textEn: "Dubai Tour Inquiry", tagAr: "متابعة", tagEn: "Follow Up", style: "tag-green" },
+            { initials: "MA", name: "Mostafa Ali", textAr: "عميل إعلانات فيسبوك", textEn: "Facebook Ad Lead", tagAr: "جديد", tagEn: "New Lead", style: "tag-blue" }
+        ];
+
+        // Current State
         let currentLang = 'en';
         let currentTheme = 'light';
+        let isUserManualThemeSelection = false;
+        let chatScriptIndex = 0;
+        let chatLoopTimer = null;
 
-        // Theme Toggle
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const themeText = document.getElementById('themeText');
-        
-        themeToggleBtn.addEventListener('click', function(e) {
+        let leadsData = [streamLeadsPool[0], streamLeadsPool[1]];
+        let kpiLeads = 1482;
+        let kpiClosed = 342;
+
+        // System Language Init
+        function initSystemLanguage() {
+            const userLang = navigator.language || navigator.userLanguage || 'en';
+            currentLang = userLang.toLowerCase().startsWith('ar') ? 'ar' : 'en';
+            
+            document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', currentLang);
+            const langText = document.getElementById('langText');
+            if (langText) {
+                langText.textContent = currentLang === 'en' ? 'العربية' : 'English';
+            }
+        }
+
+        // Theme Initialization
+        const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function applyTheme(theme) {
+            currentTheme = theme;
+            document.documentElement.setAttribute('data-theme', theme);
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeText = document.getElementById('themeText');
+
+            if (themeToggleBtn) {
+                themeToggleBtn.querySelector('i').className = theme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            }
+            if (themeText) {
+                themeText.textContent = theme === 'light' ? (currentLang === 'en' ? 'Dark' : 'داكن') : (currentLang === 'en' ? 'Light' : 'فاتح');
+            }
+        }
+
+        function initSystemTheme() {
+            applyTheme(systemThemeQuery.matches ? 'dark' : 'light');
+            systemThemeQuery.addEventListener('change', (e) => {
+                if (!isUserManualThemeSelection) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', function(e) {
             e.preventDefault();
-            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            themeToggleBtn.querySelector('i').className = currentTheme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-            themeText.textContent = currentTheme === 'light' ? (currentLang === 'en' ? 'Dark' : 'داكن') : (currentLang === 'en' ? 'Light' : 'فاتح');
+            isUserManualThemeSelection = true;
+            applyTheme(currentTheme === 'light' ? 'dark' : 'light');
         });
 
-        // Language Toggle
-        const langToggleBtn = document.getElementById('langToggle');
-        const langText = document.getElementById('langText');
-
-        langToggleBtn.addEventListener('click', function(e) {
+        document.getElementById('langToggle').addEventListener('click', function(e) {
             e.preventDefault();
             currentLang = currentLang === 'en' ? 'ar' : 'en';
             document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
             document.documentElement.setAttribute('lang', currentLang);
-            langText.textContent = currentLang === 'en' ? 'العربية' : 'English';
-            themeText.textContent = currentTheme === 'light' ? (currentLang === 'en' ? 'Dark' : 'داكن') : (currentLang === 'en' ? 'Light' : 'فاتح');
+            document.getElementById('langText').textContent = currentLang === 'en' ? 'العربية' : 'English';
+            applyTheme(currentTheme);
             updateLanguage();
+            renderProLeads();
+            restartChatSimulation();
         });
 
         function updateLanguage() {
             const data = i18n[currentLang];
-            
-            // Text elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (data[key]) {
-                    el.innerHTML = data[key];
-                }
+                if (data[key]) el.innerHTML = data[key];
             });
 
-            // Placeholder elements
             document.querySelectorAll('[data-i18n-ph]').forEach(el => {
                 const key = el.getAttribute('data-i18n-ph');
-                if (data[key]) {
-                    el.placeholder = data[key];
-                }
+                if (data[key]) el.placeholder = data[key];
             });
 
-            // Modals Content update
             policyTextContent.innerHTML = data.policyHtml;
             termsTextContent.innerHTML = data.termsHtml;
         }
 
-        // Initialize default language content
-        updateLanguage();
+        // Render Dashboard Stream Leads
+        function renderProLeads() {
+            const container = document.getElementById('proLeadsContainer');
+            if (!container) return;
+            container.innerHTML = '';
 
-        // Modal Window Handlers
-        function openModal(modalElement) {
-            modalElement.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            leadsData.forEach((lead, idx) => {
+                const div = document.createElement('div');
+                div.className = `pro-lead-item ${idx === 0 ? 'highlight-new' : ''}`;
+                const textVal = currentLang === 'ar' ? lead.textAr : lead.textEn;
+                const tagVal = currentLang === 'ar' ? lead.tagAr : lead.tagEn;
+
+                div.innerHTML = `
+                    <div class="pro-user-info">
+                        <div class="pro-user-avatar">${lead.initials}</div>
+                        <div>
+                            <strong style="font-size: 0.75rem; color: var(--text-dark);">${lead.name}</strong>
+                            <div style="font-size: 0.65rem; color: var(--text-muted);">${textVal}</div>
+                        </div>
+                    </div>
+                    <span class="pro-badge-tag ${lead.style}">${tagVal}</span>
+                `;
+                container.appendChild(div);
+            });
         }
 
-        function closeModal(modalElement) {
-            modalElement.classList.remove('active');
-            document.body.style.overflow = 'auto';
+        // Fast & Dynamic Dashboard Loop Engine (1.2 Seconds Pace)
+        function startProDashboardLoop() {
+            setInterval(() => {
+                // Increment KPIs quickly and smoothly
+                kpiLeads += Math.floor(Math.random() * 2) + 1;
+                document.getElementById('valTotalLeads').textContent = kpiLeads.toLocaleString();
+
+                if (Math.random() > 0.4) {
+                    kpiClosed += 1;
+                    document.getElementById('valDealsClosed').textContent = kpiClosed.toLocaleString();
+                }
+
+                // Stream new lead item rapidly
+                const nextLead = streamLeadsPool[Math.floor(Math.random() * streamLeadsPool.length)];
+                leadsData.pop();
+                leadsData.unshift(nextLead);
+                renderProLeads();
+
+            }, 1200); // Fast 1.2 Seconds Speed
         }
+
+        // Scroll Reveal Observer
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) entry.target.classList.add('revealed');
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        }
+
+        // Live Active AI Chat Engine
+        function runChatStreamStep() {
+            const streamBox = document.getElementById('chatStreamBox');
+            const typingIndicator = document.getElementById('aiTypingIndicator');
+            const currentScript = liveChatScripts[currentLang];
+
+            if (!streamBox) return;
+
+            if (chatScriptIndex >= currentScript.length) {
+                chatLoopTimer = setTimeout(() => {
+                    streamBox.innerHTML = '';
+                    chatScriptIndex = 0;
+                    runChatStreamStep();
+                }, 3500);
+                return;
+            }
+
+            const msgObj = currentScript[chatScriptIndex];
+
+            if (msgObj.sender === 'user') {
+                appendChatMessage(msgObj.text, 'msg-user');
+                chatScriptIndex++;
+
+                chatLoopTimer = setTimeout(() => {
+                    if (typingIndicator) typingIndicator.style.display = 'flex';
+                    scrollChatToBottom();
+
+                    chatLoopTimer = setTimeout(() => {
+                        if (typingIndicator) typingIndicator.style.display = 'none';
+                        if (chatScriptIndex < currentScript.length) {
+                            appendChatMessage(currentScript[chatScriptIndex].text, 'msg-bot');
+                            chatScriptIndex++;
+                        }
+                        chatLoopTimer = setTimeout(runChatStreamStep, 2000);
+                    }, 1300);
+
+                }, 600);
+            }
+        }
+
+        function appendChatMessage(text, className) {
+            const streamBox = document.getElementById('chatStreamBox');
+            if (!streamBox) return;
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `msg-bubble ${className}`;
+            msgDiv.textContent = text;
+            streamBox.appendChild(msgDiv);
+            scrollChatToBottom();
+        }
+
+        function scrollChatToBottom() {
+            const streamBox = document.getElementById('chatStreamBox');
+            if (streamBox) streamBox.scrollTop = streamBox.scrollHeight;
+        }
+
+        function restartChatSimulation() {
+            clearTimeout(chatLoopTimer);
+            const streamBox = document.getElementById('chatStreamBox');
+            const typingIndicator = document.getElementById('aiTypingIndicator');
+            if (streamBox) streamBox.innerHTML = '';
+            if (typingIndicator) typingIndicator.style.display = 'none';
+            chatScriptIndex = 0;
+            runChatStreamStep();
+        }
+
+        // Modal Handlers
+        function openModal(modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeModal(modal) { modal.classList.remove('active'); document.body.style.overflow = 'auto'; }
 
         openDemoButtons.forEach(btn => btn.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
@@ -1897,15 +2380,13 @@
             if (e.target === termsModal) closeModal(termsModal);
         });
 
-        // EmailJS Form Handler with User Credentials
+        // EmailJS Form Submission
         demoForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
             const currentData = i18n[currentLang];
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>${currentData.msgSending}</span>`;
 
-            // Configured with Service ID and Template ID
             emailjs.sendForm('service_lv152q9', 'template_rf3ckbd', this)
                 .then(function() {
                     alert(currentData.msgSuccess);
@@ -1920,6 +2401,15 @@
                     submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>${currentData.btnConfirm}</span>`;
                 });
         });
+
+        // Initialize All Core Systems
+        initSystemLanguage();
+        initSystemTheme();
+        updateLanguage();
+        renderProLeads();
+        startProDashboardLoop();
+        runChatStreamStep();
+        initScrollReveal();
     </script>
 </body>
 </html>
