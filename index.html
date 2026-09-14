@@ -1010,18 +1010,14 @@
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-dark);
-        }
-
-        .contact-title {
-            font-size: 1rem;
-            color: var(--text-muted);
             margin-bottom: 1rem;
         }
 
         .contact-phone-box {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 12px;
             margin-top: 0.5rem;
             background: var(--bg-card);
             padding: 0.6rem 1.2rem;
@@ -1034,11 +1030,17 @@
             font-weight: 800;
             color: var(--text-dark);
             letter-spacing: 0.5px;
+            direction: ltr;
+            unicode-bidi: embed;
         }
 
-        .call-icon-btn {
-            background: #22C55E;
-            color: var(--white);
+        .contact-actions-group {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .call-icon-btn, .whatsapp-icon-btn {
             width: 38px;
             height: 38px;
             border-radius: 50%;
@@ -1048,12 +1050,27 @@
             text-decoration: none;
             font-size: 1rem;
             transition: transform 0.2s ease, background 0.2s ease;
-            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .call-icon-btn {
+            background: #22C55E;
+            color: var(--white);
         }
 
         .call-icon-btn:hover {
             transform: scale(1.1);
             background: #16A34A;
+        }
+
+        .whatsapp-icon-btn {
+            background: #25D366;
+            color: var(--white);
+        }
+
+        .whatsapp-icon-btn:hover {
+            transform: scale(1.1);
+            background: #20BA5A;
         }
 
         /* Modal Overlay Shared Base */
@@ -1353,7 +1370,7 @@
                 <li><a href="#features" data-i18n="navFeatures">Features</a></li>
                 <li><a href="#ai-agent" data-i18n="navAiAgent">AI Agent</a></li>
                 <li><a href="#solutions" data-i18n="navIndustries">Industries</a></li>
-                <li><a href="https://wa.me/201211695161" target="_blank" data-i18n="navContact">Contact</a></li>
+                <li><a href="#contact-section" data-i18n="navContact">Contact</a></li>
             </ul>
 
             <div class="nav-controls">
@@ -1375,7 +1392,7 @@
             <a href="#features" class="mobile-link" data-i18n="navFeatures">Features</a>
             <a href="#ai-agent" class="mobile-link" data-i18n="navAiAgent">AI Agent</a>
             <a href="#solutions" class="mobile-link" data-i18n="navIndustries">Industries</a>
-            <a href="https://wa.me/201211695161" target="_blank" class="mobile-link" data-i18n="navContact">Contact</a>
+            <a href="#contact-section" class="mobile-link" data-i18n="navContact">Contact</a>
             <button class="btn btn-primary open-demo-btn" type="button" style="width: 100%; margin-top: 0.5rem;" data-i18n="btnBookDemo">Book a Demo</button>
         </div>
     </header>
@@ -1676,19 +1693,23 @@
         </div>
     </section>
 
-    <!-- Thank You & Direct Contact Section -->
-    <section class="thank-you-section">
+    <!-- Thank You & Contact Info Section (Contact Card) -->
+    <section class="thank-you-section" id="contact-section">
         <div class="container reveal-on-scroll">
-            <h2 class="thank-you-title">Thank you</h2>
+            <h2 class="thank-you-title" data-i18n="thankYouTitle">Thank you</h2>
             <div class="contact-card-box">
-                <div class="contact-label">Contact :</div>
-                <div class="contact-name">Ahmed Elsayed</div>
-                <div class="contact-title">Telesales specialist</div>
+                <div class="contact-label" data-i18n="contactCardLabel">Contact :</div>
+                <div class="contact-name" data-i18n="contactCardName">Ahmed Elsayed</div>
                 <div class="contact-phone-box">
                     <span class="phone-number">01211695161</span>
-                    <a href="tel:01211695161" class="call-icon-btn" title="Call Now">
-                        <i class="fa-solid fa-phone"></i>
-                    </a>
+                    <div class="contact-actions-group">
+                        <a href="tel:01211695161" class="call-icon-btn" title="Call Now">
+                            <i class="fa-solid fa-phone"></i>
+                        </a>
+                        <a href="https://wa.me/201211695161" target="_blank" class="whatsapp-icon-btn" title="Chat on WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1784,9 +1805,9 @@
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h5 data-i18n="fCol3">Contact Us</h5>
+                    <h5 data-i18n="fCol3">Company</h5>
                     <ul>
-                        <li><a href="https://wa.me/201211695161" target="_blank" data-i18n="fLink5">Support Center</a></li>
+                        <li><a href="#contact-section" data-i18n="fLink5">Contact</a></li>
                         <li><a id="openPrivacyBtn" data-i18n="fLink6">Privacy Policy</a></li>
                         <li><a id="openTermsBtn" data-i18n="fLink7">Terms of Service</a></li>
                     </ul>
@@ -1931,6 +1952,9 @@
                 opt3: "More than 15",
                 phProb: "What's the biggest problem you're facing?",
                 btnConfirm: "Confirm Request",
+                thankYouTitle: "Thank you",
+                contactCardLabel: "Contact :",
+                contactCardName: "Ahmed Elsayed",
                 privacyPolicyTitle: "Privacy Policy",
                 privacyLastUpdated: "Last updated: 2026/08/31",
                 termsTitle: "Terms of Service",
@@ -1938,12 +1962,12 @@
                 footerDesc: "The smartest WhatsApp-first CRM empowering sales teams to close deals faster and serve customers seamlessly.",
                 fCol1: "Platform",
                 fCol2: "Industries",
-                fCol3: "Contact Us",
+                fCol3: "Company",
                 fLink1: "WhatsApp CRM",
                 fLink2: "AI Agent",
                 fLink3: "Lead Distribution",
                 fLink4: "Analytics",
-                fLink5: "Contact via WhatsApp",
+                fLink5: "Contact",
                 fLink6: "Privacy Policy",
                 fLink7: "Terms of Service",
                 msgSending: "Sending Request...",
@@ -2081,6 +2105,9 @@
                 opt3: "أكثر من 15",
                 phProb: "ما هي أكبر مشكلة تواجهك حالياً؟",
                 btnConfirm: "تأكيد الطلب",
+                thankYouTitle: "شكراً لك",
+                contactCardLabel: "تواصل مع :",
+                contactCardName: "أحمد السيد",
                 privacyPolicyTitle: "سياسة الخصوصية",
                 privacyLastUpdated: "آخر تحديث: 31/08/2026",
                 termsTitle: "شروط الاستخدام",
@@ -2088,12 +2115,12 @@
                 footerDesc: "نظام إدارة المبيعات والعملاء الأذكى عبر واتساب لمساعدة الفرق على إغلاق الصفقات أسرع.",
                 fCol1: "النظام",
                 fCol2: "القطاعات",
-                fCol3: "تواصل معنا",
+                fCol3: "الشركة",
                 fLink1: "واتساب CRM",
                 fLink2: "الوكيل الذكي",
                 fLink3: "توزيع العملاء",
                 fLink4: "التقارير",
-                fLink5: "تواصل عبر الواتساب",
+                fLink5: "تواصل معنا",
                 fLink6: "سياسة الخصوصية",
                 fLink7: "شروط الاستخدام",
                 msgSending: "جاري إرسال الطلب...",
