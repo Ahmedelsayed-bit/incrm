@@ -28,38 +28,52 @@
 
     <style>
         :root {
-            --primary: #003B73;
-            --primary-light: #0072CE;
-            --accent: #00A3E0;
-            --bg-body: #F4F7FB;
-            --bg-card: #FFFFFF;
-            --bg-modal: #F8FAFC;
-            --text-dark: #0A192F;
-            --text-muted: #5A6A85;
+            --primary: #002E5D;
+            --primary-light: #0066CC;
+            --accent: #0099D8;
+            --bg-body: #EBF1F8;
+            --bg-card: #F8FAFC;
+            --bg-header: rgba(235, 242, 250, 0.92);
+            --bg-modal: #F1F5F9;
+            --bg-section-alt: rgba(226, 234, 244, 0.65);
+            --text-dark: #071326;
+            --text-muted: #4A5A75;
             --white: #FFFFFF;
-            --border-color: rgba(0, 0, 0, 0.06);
-            --input-border: #CBD5E1;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+            --border-color: rgba(0, 46, 93, 0.09);
+            --input-border: #BCCCDC;
+            --shadow-sm: 0 4px 10px -1px rgba(7, 19, 38, 0.06);
+            --shadow-lg: 0 20px 30px -5px rgba(7, 19, 38, 0.12);
             --radius-md: 12px;
             --radius-lg: 20px;
             --font-family: 'Plus Jakarta Sans', sans-serif;
+            --bg-grid-line: rgba(0, 80, 160, 0.055);
+            --bg-glow-1: rgba(0, 153, 216, 0.1);
+            --bg-glow-2: rgba(0, 46, 93, 0.08);
+            --modal-scroll-thumb: rgba(0, 102, 204, 0.28);
+            --modal-scroll-thumb-hover: rgba(0, 102, 204, 0.48);
         }
 
-        /* Dark Mode Theme Variables */
+        /* Dark Mode Theme Variables - Deeper & More Executive Navy */
         [data-theme="dark"] {
-            --primary: #0A192F;
+            --primary: #040B16;
             --primary-light: #00A3E0;
             --accent: #38BDF8;
-            --bg-body: #0F172A;
-            --bg-card: #1E293B;
-            --bg-modal: #1E293B;
+            --bg-body: #070D19;
+            --bg-card: #0F192A;
+            --bg-header: rgba(8, 15, 28, 0.94);
+            --bg-modal: #0F192A;
+            --bg-section-alt: rgba(12, 21, 38, 0.72);
             --text-dark: #F8FAFC;
-            --text-muted: #94A3B8;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --input-border: #334155;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            --text-muted: #8E9BAE;
+            --border-color: rgba(56, 189, 248, 0.12);
+            --input-border: #1E2D44;
+            --shadow-sm: 0 4px 10px -1px rgba(0, 0, 0, 0.45);
+            --shadow-lg: 0 20px 30px -5px rgba(0, 0, 0, 0.65);
+            --bg-grid-line: rgba(56, 189, 248, 0.045);
+            --bg-glow-1: rgba(0, 163, 224, 0.08);
+            --bg-glow-2: rgba(56, 189, 248, 0.05);
+            --modal-scroll-thumb: rgba(56, 189, 248, 0.28);
+            --modal-scroll-thumb-hover: rgba(56, 189, 248, 0.5);
         }
 
         /* RTL Font for Arabic */
@@ -83,6 +97,40 @@
             min-height: 100vh;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
+        }
+
+        /* Subtle Animated Background Lines & Identity Glow */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(to right, var(--bg-grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--bg-grid-line) 1px, transparent 1px),
+                radial-gradient(circle at 15% 25%, var(--bg-glow-1) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, var(--bg-glow-2) 0%, transparent 45%);
+            background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+            animation: subtleBgMotion 22s linear infinite;
+        }
+
+        @keyframes subtleBgMotion {
+            0% {
+                background-position: 0 0, 0 0, 0% 0%, 0% 0%;
+            }
+            50% {
+                background-position: 24px 24px, 24px 24px, 4% 6%, -4% -6%;
+            }
+            100% {
+                background-position: 48px 48px, 48px 48px, 0% 0%, 0% 0%;
+            }
+        }
+
+        section, footer {
+            position: relative;
+            z-index: 1;
         }
 
         /* Scroll Reveal Animation Styles */
@@ -98,18 +146,24 @@
             transform: translateY(0);
         }
 
-        /* Header / Navbar */
+        /* Header / Navbar - Slightly Darker & More Executive */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
+            background: var(--bg-header);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(7, 19, 38, 0.07);
             padding: 0.8rem 0;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        [data-theme="dark"] header {
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.55);
         }
 
         .container {
@@ -134,19 +188,32 @@
             flex-shrink: 0;
         }
 
+        /* Frameless Logo with Gentle Motion & Strong Shadow for White Letters in Light Mode */
         .logo-img-circular {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary-light);
-            box-shadow: 0 2px 10px rgba(0, 114, 206, 0.25);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 46px;
+            height: 46px;
+            border-radius: 0;
+            object-fit: contain;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            filter: drop-shadow(0 2px 6px rgba(0, 35, 75, 0.65)) drop-shadow(0 0 2px rgba(0, 46, 93, 0.55));
+            animation: logoGentleFloat 3.6s ease-in-out infinite;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        [data-theme="dark"] .logo-img-circular {
+            filter: drop-shadow(0 2px 8px rgba(0, 163, 224, 0.45)) drop-shadow(0 0 2px rgba(0, 0, 0, 0.7));
+        }
+
+        @keyframes logoGentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
         }
 
         .logo-box:hover .logo-img-circular {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 114, 206, 0.4);
+            transform: scale(1.06);
+            filter: drop-shadow(0 4px 9px rgba(0, 35, 75, 0.75)) drop-shadow(0 0 4px rgba(0, 114, 206, 0.55));
         }
 
         .logo-text {
@@ -187,7 +254,7 @@
 
         .hamburger-btn {
             display: none;
-            background: var(--bg-body);
+            background: var(--bg-card);
             color: var(--text-dark);
             border: 1px solid var(--border-color);
             padding: 0.55rem 0.85rem;
@@ -212,7 +279,6 @@
             flex-direction: column;
             gap: 1.2rem;
             
-            /* Smooth Slide & Fade Properties */
             max-height: 0;
             opacity: 0;
             visibility: hidden;
@@ -223,7 +289,7 @@
         }
 
         .mobile-menu.active {
-            max-height: 400px;
+            max-height: 450px;
             opacity: 1;
             visibility: visible;
             padding: 1.5rem 5vw;
@@ -249,7 +315,7 @@
         }
 
         .icon-btn {
-            background: var(--bg-body);
+            background: var(--bg-card);
             color: var(--text-dark);
             border: 1px solid var(--border-color);
             padding: 0.55rem 0.85rem;
@@ -294,12 +360,12 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-light), var(--primary));
             color: var(--white);
-            box-shadow: 0 4px 15px rgba(0, 114, 206, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.35);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 114, 206, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.45);
         }
 
         .btn-secondary {
@@ -309,14 +375,14 @@
         }
 
         .btn-secondary:hover {
-            background: rgba(0, 114, 206, 0.05);
+            background: rgba(0, 114, 206, 0.08);
         }
 
         /* Hero Section */
         .hero {
             padding: 160px 0 80px;
             width: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(0, 163, 224, 0.08) 0%, rgba(255, 255, 255, 0) 90%);
+            background: radial-gradient(circle at 10% 20%, rgba(0, 163, 224, 0.1) 0%, rgba(255, 255, 255, 0) 90%);
         }
 
         .hero-grid {
@@ -332,12 +398,13 @@
             align-items: center;
             gap: 8px;
             padding: 6px 16px;
-            background: rgba(0, 163, 224, 0.1);
+            background: rgba(0, 163, 224, 0.12);
             color: var(--primary-light);
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 163, 224, 0.18);
         }
 
         .hero h1 {
@@ -367,7 +434,7 @@
             align-items: center;
         }
 
-        /* COMPACT & ELEGANT PROFESSIONAL DASHBOARD MOCKUP */
+        /* Professional Dashboard Mockup */
         .pro-dashboard {
             background: var(--bg-card);
             border-radius: var(--radius-md);
@@ -375,7 +442,7 @@
             width: 100%;
             max-width: 460px;
             margin: 0 auto;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
             position: relative;
             display: flex;
@@ -429,7 +496,6 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
 
-        /* Compact Grid Top KPI Metrics */
         .pro-kpi-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -468,7 +534,6 @@
             gap: 3px;
         }
 
-        /* Compact Chart Section */
         .pro-chart-box {
             background: var(--bg-body);
             border-radius: 10px;
@@ -504,7 +569,6 @@
             gap: 4px;
         }
 
-        /* Smooth Continuous Wave Animation for Chart Bars */
         .chart-bar-fill {
             width: 100%;
             background: linear-gradient(180deg, var(--accent), var(--primary-light));
@@ -512,13 +576,6 @@
             animation: continuousBarWave 3s infinite ease-in-out alternate;
             will-change: height;
         }
-
-        .chart-bar-col:nth-child(1) .chart-bar-fill { animation-delay: 0.0s; animation-duration: 2.8s; }
-        .chart-bar-col:nth-child(2) .chart-bar-fill { animation-delay: 0.4s; animation-duration: 3.2s; }
-        .chart-bar-col:nth-child(3) .chart-bar-fill { animation-delay: 0.8s; animation-duration: 2.6s; }
-        .chart-bar-col:nth-child(4) .chart-bar-fill { animation-delay: 1.2s; animation-duration: 3.4s; }
-        .chart-bar-col:nth-child(5) .chart-bar-fill { animation-delay: 1.6s; animation-duration: 2.9s; }
-        .chart-bar-col:nth-child(6) .chart-bar-fill { animation-delay: 2.0s; animation-duration: 3.1s; }
 
         @keyframes continuousBarWave {
             0% { height: 35%; }
@@ -532,7 +589,6 @@
             font-weight: 600;
         }
 
-        /* Compact Recent Leads Stream */
         .pro-lead-stream {
             display: flex;
             flex-direction: column;
@@ -602,7 +658,7 @@
         .ai-agent-section {
             padding: 90px 0;
             width: 100%;
-            background: radial-gradient(circle at 90% 10%, rgba(0, 114, 206, 0.08) 0%, rgba(255, 255, 255, 0) 80%);
+            background: radial-gradient(circle at 90% 10%, rgba(0, 114, 206, 0.1) 0%, rgba(255, 255, 255, 0) 80%);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
         }
@@ -633,7 +689,6 @@
             margin-top: 4px;
         }
 
-        /* Animated Active AI Chat Card */
         .ai-chat-card {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
@@ -759,10 +814,6 @@
             align-self: flex-end;
         }
 
-        [dir="rtl"] .typing-container {
-            align-self: flex-end;
-        }
-
         .typing-label {
             font-size: 0.75rem;
             color: var(--primary-light);
@@ -790,7 +841,6 @@
             40% { transform: translateY(-4px); }
         }
 
-        /* Bottom Chat Message Bar */
         .chat-input-bar {
             display: flex;
             align-items: center;
@@ -812,10 +862,6 @@
             padding: 4px 6px;
         }
 
-        .chat-input-field::placeholder {
-            color: var(--text-muted);
-        }
-
         .chat-action-btn {
             background: transparent;
             border: none;
@@ -824,9 +870,6 @@
             cursor: pointer;
             padding: 4px 6px;
             transition: color 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .chat-action-btn:hover {
@@ -862,7 +905,8 @@
         .features {
             padding: 90px 0;
             width: 100%;
-            background: var(--bg-card);
+            background: var(--bg-section-alt);
+            backdrop-filter: blur(4px);
             transition: background-color 0.3s ease;
         }
 
@@ -894,8 +938,9 @@
         .feature-card {
             padding: 2rem;
             border-radius: var(--radius-md);
-            background: var(--bg-body);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
         }
 
@@ -971,11 +1016,110 @@
             margin-bottom: 0.5rem;
         }
 
+        /* FAQ Section (Interactive Accordion) */
+        .faq-section {
+            padding: 90px 0;
+            width: 100%;
+            background: var(--bg-section-alt);
+            backdrop-filter: blur(4px);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            align-items: start;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            padding: 1.4rem 1.6rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .faq-item.open {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-item h4 {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .faq-q-wrap {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .faq-q-wrap i {
+            color: var(--primary-light);
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .faq-chevron {
+            color: var(--primary-light);
+            font-size: 0.9rem;
+            transition: transform 0.35s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: 1px solid transparent;
+            transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.3s ease,
+                        margin-top 0.3s ease,
+                        padding-top 0.3s ease,
+                        border-color 0.3s ease;
+        }
+
+        .faq-item.open p {
+            max-height: 260px;
+            opacity: 1;
+            margin-top: 0.9rem;
+            padding-top: 0.9rem;
+            border-top-color: var(--border-color);
+        }
+
         /* Thank You & Contact Info Section */
         .thank-you-section {
             padding: 80px 0;
             width: 100%;
-            background: var(--bg-card);
+            background: var(--bg-section-alt);
+            backdrop-filter: blur(4px);
             text-align: center;
             border-top: 1px solid var(--border-color);
         }
@@ -989,7 +1133,7 @@
         }
 
         .contact-card-box {
-            background: var(--bg-body);
+            background: var(--bg-card);
             width: 100%;
             max-width: 480px;
             margin: 0 auto;
@@ -1019,7 +1163,7 @@
             justify-content: center;
             gap: 12px;
             margin-top: 0.5rem;
-            background: var(--bg-card);
+            background: var(--bg-body);
             padding: 0.6rem 1.2rem;
             border-radius: 30px;
             border: 1px solid var(--border-color);
@@ -1080,8 +1224,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 25, 47, 0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(5, 13, 26, 0.75);
+            backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1110,6 +1254,33 @@
             transform: translateY(20px);
             transition: transform 0.3s ease;
             border: 1px solid var(--border-color);
+            /* Custom Scrollbar Matching Popup Background Color */
+            scrollbar-width: thin;
+            scrollbar-color: var(--modal-scroll-thumb) var(--bg-modal);
+        }
+
+        .demo-card::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .demo-card::-webkit-scrollbar-track {
+            background: var(--bg-modal);
+            border-radius: 24px;
+            margin: 14px 0;
+        }
+
+        .demo-card::-webkit-scrollbar-thumb {
+            background-color: var(--modal-scroll-thumb);
+            border-radius: 20px;
+            border: 2px solid var(--bg-modal);
+        }
+
+        .demo-card::-webkit-scrollbar-thumb:hover {
+            background-color: var(--modal-scroll-thumb-hover);
+        }
+
+        .demo-card::-webkit-scrollbar-corner {
+            background: var(--bg-modal);
         }
 
         .scrollable-modal-card {
@@ -1256,12 +1427,13 @@
             color: var(--white);
             padding: 70px 0 30px;
             width: 100%;
+            border-top: 1px solid rgba(56, 189, 248, 0.12);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 3rem;
+            grid-template-columns: 1.6fr 1.4fr 1fr 0.9fr;
+            gap: 2.5rem;
             margin-bottom: 4rem;
         }
 
@@ -1282,18 +1454,25 @@
         }
 
         .footer-col ul li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.65rem;
         }
 
         .footer-col ul a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.2s ease;
             cursor: pointer;
+            display: inline-block;
+            font-size: 0.92rem;
         }
 
         .footer-col ul a:hover {
             color: var(--white);
+            transform: translateX(3px);
+        }
+
+        [dir="rtl"] .footer-col ul a:hover {
+            transform: translateX(-3px);
         }
 
         .footer-bottom {
@@ -1331,7 +1510,7 @@
             .container { padding: 0 4vw; }
             .nav-container { gap: 4px; }
             .logo-box { gap: 6px; }
-            .logo-img-circular { width: 36px; height: 36px; }
+            .logo-img-circular { width: 38px; height: 38px; }
             .logo-text { font-size: 1.05rem; }
             .nav-links { display: none; }
             .header-demo-btn { display: none; }
@@ -1370,6 +1549,7 @@
                 <li><a href="#features" data-i18n="navFeatures">Features</a></li>
                 <li><a href="#ai-agent" data-i18n="navAiAgent">AI Agent</a></li>
                 <li><a href="#solutions" data-i18n="navIndustries">Industries</a></li>
+                <li><a href="#faq" data-i18n="navFaq">FAQ</a></li>
                 <li><a href="#contact-section" data-i18n="navContact">Contact</a></li>
             </ul>
 
@@ -1392,6 +1572,7 @@
             <a href="#features" class="mobile-link" data-i18n="navFeatures">Features</a>
             <a href="#ai-agent" class="mobile-link" data-i18n="navAiAgent">AI Agent</a>
             <a href="#solutions" class="mobile-link" data-i18n="navIndustries">Industries</a>
+            <a href="#faq" class="mobile-link" data-i18n="navFaq">FAQ</a>
             <a href="#contact-section" class="mobile-link" data-i18n="navContact">Contact</a>
             <button class="btn btn-primary open-demo-btn" type="button" style="width: 100%; margin-top: 0.5rem;" data-i18n="btnBookDemo">Book a Demo</button>
         </div>
@@ -1410,7 +1591,7 @@
                 </div>
             </div>
             
-            <!-- COMPACT HIGH END PROFESSIONAL DASHBOARD MOCKUP -->
+            <!-- Professional Dashboard Mockup -->
             <div class="pro-dashboard">
                 <div class="pro-dash-header">
                     <div class="pro-dash-dots">
@@ -1442,7 +1623,7 @@
                     </div>
                 </div>
 
-                <!-- Compact Chart Analytics Section -->
+                <!-- Chart Analytics Section -->
                 <div class="pro-chart-box">
                     <div class="pro-chart-title">
                         <span>Weekly Activity</span>
@@ -1567,7 +1748,7 @@
         </div>
     </section>
 
-    <!-- Key Features Section -->
+    <!-- Key Features Section (Ordered: Cards WITH details first, cards WITHOUT details at the end) -->
     <section class="features" id="features">
         <div class="container">
             <div class="section-header reveal-on-scroll">
@@ -1575,6 +1756,7 @@
                 <p data-i18n="featSub">Equip your team with an all-in-one platform to prevent lost deals and streamline customer interactions.</p>
             </div>
             <div class="features-grid">
+                <!-- === CARDS WITH DETAILS === -->
                 <!-- 1. Lead Sync -->
                 <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-network-wired"></i></div>
@@ -1611,37 +1793,51 @@
                     <h3 data-i18n="fDashboardFilterTitle">Smart Dashboard & Lead Filtering</h3>
                     <p data-i18n="fDashboardFilterDesc">Simple & organized dashboard allowing instant lead filtering by status, date created, or specific assigned project for quick insights.</p>
                 </div>
-                <!-- 7. Integrated Landing Page -->
+                <!-- 7. Calls & SIP Phone -->
                 <div class="feature-card reveal-on-scroll">
-                    <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
-                    <h3 data-i18n="fLandingTitle">Integrated Landing Page</h3>
-                    <p data-i18n="fLandingDesc">Design free landing pages for your products easily inside the platform.</p>
+                    <div class="feature-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                    <h3 data-i18n="fCallsTitle">Calls & SIP Phone</h3>
+                    <p data-i18n="fCallsDesc">Auto-dial through complete lists, integrated SIP phone, and call recordings linked directly to the customer's profile.</p>
                 </div>
-                <!-- 8. Platform Web & App -->
+                <!-- 8. Teams & Permissions -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 data-i18n="fTeamsTitle">Teams & Permissions</h3>
+                    <p data-i18n="fTeamsDesc">Precise access controls, custom user roles, and a comprehensive audit log for every action taken inside the system.</p>
+                </div>
+                <!-- 9. Platform Web & App -->
                 <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-laptop-code"></i></div>
                     <h3 data-i18n="fPlatformTitle">All-in-One Platform (Web & Mobile Apps)</h3>
                     <p data-i18n="fPlatformDesc">Access your CRM seamlessly anywhere, anytime via our responsive Web Dashboard and official Android & iOS Mobile Applications.</p>
                 </div>
-                <!-- 9. QR Code Link -->
+                <!-- 10. QR Code Link -->
                 <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-qrcode"></i></div>
                     <h3 data-i18n="fQrTitle">Instant WhatsApp Web Link</h3>
                     <p data-i18n="fQrDesc">Connect your official or sales WhatsApp numbers instantly by simply scanning a QR code without any complex API integrations.</p>
                 </div>
-                <!-- 10. Safe Timed Campaigns -->
+                <!-- 11. Safe Timed Campaigns -->
                 <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-paper-plane"></i></div>
                     <h3 data-i18n="f5Title">Safe Timed Bulk Campaigns</h3>
                     <p data-i18n="f5Desc">Execute targeted WhatsApp broadcast campaigns using smart delay intervals to maintain account health.</p>
                 </div>
-                <!-- 11. Multi-Project -->
+
+                <!-- === CARDS WITHOUT DETAILS (Placed at the end) === -->
+                <!-- 12. Integrated Landing Page -->
+                <div class="feature-card reveal-on-scroll">
+                    <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 data-i18n="fLandingTitle">Integrated Landing Page</h3>
+                    <p data-i18n="fLandingDesc">Design free landing pages for your products easily inside the platform.</p>
+                </div>
+                <!-- 13. Multi-Project -->
                 <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-diagram-project"></i></div>
                     <h3 data-i18n="fMultiProjectTitle">Multi-Project Management</h3>
                     <p data-i18n="fMultiProjectDesc">Organize your operational workflow into separate projects, allowing customized lead pipelines and team access control per project.</p>
                 </div>
-                <!-- 12. Smart Inventory -->
+                <!-- 14. Smart Inventory -->
                 <div class="feature-card reveal-on-scroll">
                     <div class="feature-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                     <h3 data-i18n="fInventoryTitle">Smart Inventory Management</h3>
@@ -1693,7 +1889,59 @@
         </div>
     </section>
 
-    <!-- Thank You & Contact Info Section (Contact Card) -->
+    <!-- Frequently Asked Questions Section (FAQ - Click to Toggle Answer) -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <h2 data-i18n="faqHeader">Frequently Asked Questions</h2>
+                <p data-i18n="faqSub">Everything you need to know about getting started with IN-CRM.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item reveal-on-scroll">
+                    <h4>
+                        <span class="faq-q-wrap">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <span data-i18n="faqQ1">Does the system require complex programming integration?</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </h4>
+                    <p data-i18n="faqA1">No! Just scan the QR code as if you are opening WhatsApp Web, and the system will instantly organize your messages without any technical expertise needed.</p>
+                </div>
+                <div class="faq-item reveal-on-scroll">
+                    <h4>
+                        <span class="faq-q-wrap">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <span data-i18n="faqQ2">Can multiple employees reply from a single number?</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </h4>
+                    <p data-i18n="faqA2">Yes, your entire team can log into the system and reply from the same WhatsApp number, and the system will auto-distribute the chats among them.</p>
+                </div>
+                <div class="faq-item reveal-on-scroll">
+                    <h4>
+                        <span class="faq-q-wrap">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <span data-i18n="faqQ3">Is my number at risk of being banned?</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </h4>
+                    <p data-i18n="faqA3">The system is programmed with smart time delays between automated replies, making it completely safe and simulating human behavior.</p>
+                </div>
+                <div class="faq-item reveal-on-scroll">
+                    <h4>
+                        <span class="faq-q-wrap">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <span data-i18n="faqQ4">How does the "Chat Pulling" feature work if an agent delays?</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </h4>
+                    <p data-i18n="faqA4">You set a specific timeframe. If the agent doesn't reply within that time, the system automatically pulls the chat from them and routes it to another available online agent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thank You & Contact Info Section -->
     <section class="thank-you-section" id="contact-section">
         <div class="container reveal-on-scroll">
             <h2 class="thank-you-title" data-i18n="thankYouTitle">Thank you</h2>
@@ -1786,15 +2034,24 @@
                     </div>
                     <p data-i18n="footerDesc">The smartest WhatsApp-first CRM empowering sales teams to close deals faster and serve customers seamlessly.</p>
                 </div>
+                <!-- Features Column: Only features that have details, clicking opens their details modal -->
                 <div class="footer-col">
-                    <h5 data-i18n="fCol1">Platform</h5>
+                    <h5 data-i18n="navFeatures">Features</h5>
                     <ul>
-                        <li><a href="#features" data-i18n="fLink1">WhatsApp CRM</a></li>
-                        <li><a href="#ai-agent" data-i18n="fLink2">AI Agent</a></li>
-                        <li><a href="#features" data-i18n="fLink3">Lead Distribution</a></li>
-                        <li><a href="#features" data-i18n="fLink4">Analytics</a></li>
+                        <li><a href="#features" data-feat-trigger="fAutoLeadTitle" data-i18n="fAutoLeadTitle">Automated Multi-Channel Lead Sync</a></li>
+                        <li><a href="#features" data-feat-trigger="f2Title" data-i18n="f2Title">Intelligent Lead Routing</a></li>
+                        <li><a href="#features" data-feat-trigger="f3Title" data-i18n="f3Title">Unified Inbox</a></li>
+                        <li><a href="#features" data-feat-trigger="f1Title" data-i18n="f1Title">24/7 AI Smart Agent</a></li>
+                        <li><a href="#features" data-feat-trigger="fHrReportsTitle" data-i18n="fHrReportsTitle">Integrated HR System</a></li>
+                        <li><a href="#features" data-feat-trigger="fDashboardFilterTitle" data-i18n="fDashboardFilterTitle">Smart Dashboard & Lead Filtering</a></li>
+                        <li><a href="#features" data-feat-trigger="fCallsTitle" data-i18n="fCallsTitle">Calls & SIP Phone</a></li>
+                        <li><a href="#features" data-feat-trigger="fTeamsTitle" data-i18n="fTeamsTitle">Teams & Permissions</a></li>
+                        <li><a href="#features" data-feat-trigger="fPlatformTitle" data-i18n="fPlatformTitle">All-in-One Platform (Web & Mobile Apps)</a></li>
+                        <li><a href="#features" data-feat-trigger="fQrTitle" data-i18n="fQrTitle">Instant WhatsApp Web Link</a></li>
+                        <li><a href="#features" data-feat-trigger="f5Title" data-i18n="f5Title">Safe Timed Bulk Campaigns</a></li>
                     </ul>
                 </div>
+                <!-- Industries Column: All 6 industries included -->
                 <div class="footer-col">
                     <h5 data-i18n="fCol2">Industries</h5>
                     <ul>
@@ -1802,8 +2059,11 @@
                         <li><a href="#solutions" data-i18n="sTourismTitle">Tourism & Travel</a></li>
                         <li><a href="#solutions" data-i18n="s1Title">Real Estate</a></li>
                         <li><a href="#solutions" data-i18n="s2Title">Automotive</a></li>
+                        <li><a href="#solutions" data-i18n="s3Title">Education</a></li>
+                        <li><a href="#solutions" data-i18n="s4Title">E-Commerce</a></li>
                     </ul>
                 </div>
+                <!-- Company Column -->
                 <div class="footer-col">
                     <h5 data-i18n="fCol3">Company</h5>
                     <ul>
@@ -1874,12 +2134,20 @@
             }
         });
 
+        // FAQ Accordion Toggle Listener
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('open');
+            });
+        });
+
         // Translations Object
         const i18n = {
             en: {
                 navFeatures: "Features",
                 navAiAgent: "AI Agent",
                 navIndustries: "Industries",
+                navFaq: "FAQ",
                 navContact: "Contact",
                 btnBookDemo: "Book a Demo",
                 heroBadge: "Next-Gen Sales Automation",
@@ -1910,6 +2178,10 @@
                 f2Desc: "Equitably distribute leads automatically and reassign unhandled chats to available agents.",
                 f3Title: "Unified Inbox",
                 f3Desc: "Manage WhatsApp, Messenger, and Instagram conversations within one centralized collaborative workspace.",
+                fCallsTitle: "Calls & SIP Phone",
+                fCallsDesc: "Auto-dial through complete lists, integrated SIP phone, and call recordings linked directly to the customer's profile.",
+                fTeamsTitle: "Teams & Permissions",
+                fTeamsDesc: "Precise access controls, custom user roles, and a comprehensive audit log for every action taken inside the system.",
                 fLandingTitle: "Integrated Landing Page",
                 fLandingDesc: "Design free landing pages for your products easily inside the platform.",
                 fPlatformTitle: "All-in-One Platform (Web & Mobile Apps)",
@@ -1940,6 +2212,16 @@
                 s3Desc: "Convert inquiries into program enrollments automatically.",
                 s4Title: "E-Commerce",
                 s4Desc: "Centralize order notifications and delivery support workflows.",
+                faqHeader: "Frequently Asked Questions",
+                faqSub: "Everything you need to know about getting started with IN-CRM.",
+                faqQ1: "Does the system require complex programming integration?",
+                faqA1: "No! Just scan the QR code as if you are opening WhatsApp Web, and the system will instantly organize your messages without any technical expertise needed.",
+                faqQ2: "Can multiple employees reply from a single number?",
+                faqA2: "Yes, your entire team can log into the system and reply from the same WhatsApp number, and the system will auto-distribute the chats among them.",
+                faqQ3: "Is my number at risk of being banned?",
+                faqA3: "The system is programmed with smart time delays between automated replies, making it completely safe and simulating human behavior.",
+                faqQ4: "How does the 'Chat Pulling' feature work if an agent delays?",
+                faqA4: "You set a specific timeframe. If the agent doesn't reply within that time, the system automatically pulls the chat from them and routes it to another available online agent.",
                 modalTitle: "Request a Demo",
                 modalSub: "Leave your details and we'll contact you to show you the system.",
                 phName: "Full name",
@@ -2033,6 +2315,7 @@
                 navFeatures: "المميزات",
                 navAiAgent: "الوكيل الذكي",
                 navIndustries: "القطاعات",
+                navFaq: "الأسئلة الشائعة",
                 navContact: "تواصل معنا",
                 btnBookDemo: "احجز نسختك",
                 heroBadge: "أتمتة المبيعات بالجيل الجديد",
@@ -2063,6 +2346,10 @@
                 f2Desc: "توزيع عادل للعملاء مع سحب تلقائي للعملاء المهملين وتحويلهم للموظف المتاح.",
                 f3Title: "صندوق محادثات موحد",
                 f3Desc: "إدارة محادثات واتساب، ماسنجر، وإنستغرام من شاشة واحدة لجميع الموظفين.",
+                fCallsTitle: "الاتصال والهاتف (SIP)",
+                fCallsDesc: "اتصال تلقائي بقائمة كاملة، هاتف SIP مدمج، وتسجيل مكالمات مرتبط مباشرة بملف العميل.",
+                fTeamsTitle: "الفرق والصلاحيات",
+                fTeamsDesc: "صلاحيات دقيقة للوصول، أدوار مخصصة للمستخدمين، وسجل تدقيق شامل لكل إجراء داخل النظام.",
                 fLandingTitle: "لاندينج بيدج مدمجة",
                 fLandingDesc: "صمم صفحات هبوط مجانية لمنتجاتك بسهولة داخل النظام.",
                 fPlatformTitle: "منصة شاملة (ويب وتطبيق موبايل)",
@@ -2093,6 +2380,16 @@
                 s3Desc: "حول استفسارات الطلاب إلى تسجيلات مؤكدة تلقائياً.",
                 s4Title: "المتاجر الإلكترونية",
                 s4Desc: "متابعة الطلبات والشحن وإرسال العروض للعملاء المهتمين.",
+                faqHeader: "الأسئلة الشائعة",
+                faqSub: "كل ما تحتاج معرفته للبدء في استخدام IN-CRM بكل سهولة.",
+                faqQ1: "هل النظام يحتاج لربط برمجي معقد؟",
+                faqA1: "لا! فقط امسح كود الـ QR كأنك تفتح واتساب ويب، وسيعمل النظام فوراً لتنظيم رسائلك دون أي خبرة تقنية.",
+                faqQ2: "هل يمكن لأكثر من موظف الرد من رقم واحد؟",
+                faqA2: "نعم، يمكن لفريقك بالكامل الدخول للنظام والرد من نفس الرقم، وسيقوم النظام بتوزيع المحادثات بينهم.",
+                faqQ3: "هل رقمي معرّض للحظر؟",
+                faqA3: "النظام مبرمج بفواصل زمنية ذكية بين الردود التلقائية، مما يجعله آمناً تماماً كاستخدام بشري.",
+                faqQ4: "كيف يعمل سحب الأرقام في حالة تأخر الرد؟",
+                faqA4: "تحدد أنت وقت معين. إذا لم يقم الموظف بالرد، يقوم النظام بسحب المحادثة منه وتوجيهها لموظف آخر متصل.",
                 modalTitle: "طلب عرض توضيحي",
                 modalSub: "اترك بياناتك وسنتواصل معك فوراً لعرض النظام.",
                 phName: "الاسم بالكامل",
@@ -2223,7 +2520,6 @@
         let kpiLeads = 1482;
         let kpiClosed = 342;
 
-        // System Language Init
         function initSystemLanguage() {
             const userLang = navigator.language || navigator.userLanguage || 'en';
             currentLang = userLang.toLowerCase().startsWith('ar') ? 'ar' : 'en';
@@ -2236,7 +2532,6 @@
             }
         }
 
-        // Theme Initialization
         const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
         function applyTheme(theme) {
@@ -2296,7 +2591,6 @@
             termsTextContent.innerHTML = data.termsHtml;
         }
 
-        // Render Dashboard Stream Leads
         function renderProLeads() {
             const container = document.getElementById('proLeadsContainer');
             if (!container) return;
@@ -2322,7 +2616,6 @@
             });
         }
 
-        // Fast & Dynamic Dashboard Loop Engine (1.2 Seconds Pace)
         function startProDashboardLoop() {
             setInterval(() => {
                 kpiLeads += Math.floor(Math.random() * 2) + 1;
@@ -2341,7 +2634,6 @@
             }, 1200);
         }
 
-        // Scroll Reveal Observer
         function initScrollReveal() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
@@ -2352,7 +2644,6 @@
             document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
         }
 
-        // Live Active AI Chat Engine
         function runChatStreamStep() {
             const streamBox = document.getElementById('chatStreamBox');
             const typingIndicator = document.getElementById('aiTypingIndicator');
@@ -2418,7 +2709,6 @@
             runChatStreamStep();
         }
 
-        // Modal Handlers
         function openModal(modal) { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
         function closeModal(modal) { modal.classList.remove('active'); document.body.style.overflow = 'auto'; }
 
@@ -2441,7 +2731,6 @@
             if (e.target === termsModal) closeModal(termsModal);
         });
 
-        // EmailJS Form Submission
         demoForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const currentData = i18n[currentLang];
@@ -2463,7 +2752,6 @@
                 });
         });
 
-        // Initialize All Core Systems
         initSystemLanguage();
         initSystemTheme();
         updateLanguage();
@@ -2472,5 +2760,160 @@
         runChatStreamStep();
         initScrollReveal();
     </script>
+
+<!-- ===== IN-CRM: Feature details patch ===== -->
+<style>
+.feature-card.has-details{cursor:pointer;position:relative}
+.feature-card.has-details:hover{border-color:var(--primary-light)}
+.more-hint{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;font-size:.82rem;font-weight:700;color:var(--primary-light);animation:hintNudge 2.4s ease-in-out infinite}
+@keyframes hintNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+[dir="rtl"] .more-hint{animation-name:hintNudgeR}
+@keyframes hintNudgeR{0%,100%{transform:translateX(0)}50%{transform:translateX(-4px)}}
+.fd-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:1.5rem}
+.fd-orb{position:relative;width:84px;height:84px;margin-bottom:1rem}
+.fd-orb .feature-icon{position:relative;z-index:2;width:84px;height:84px;margin:0;font-size:2rem;border-radius:50%;animation:fdFloat 3s ease-in-out infinite}
+.fd-orb::before,.fd-orb::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);animation:fdRing 2.4s ease-out infinite}
+.fd-orb::after{animation-delay:1.2s}
+@keyframes fdRing{from{transform:scale(1);opacity:.7}to{transform:scale(2.1);opacity:0}}
+@keyframes fdFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.fd-sec{font-size:1rem;font-weight:800;color:var(--primary-light);margin:1.4rem 0 .7rem}
+.fd-point{display:flex;gap:12px;align-items:flex-start;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:.9rem 1rem;margin-bottom:.6rem;opacity:0;animation:fdIn .55s cubic-bezier(.16,1,.3,1) forwards;animation-delay:calc(var(--i)*.18s + .3s)}
+.fd-point i{color:var(--primary-light);margin-top:4px}
+.fd-point strong{display:block;color:var(--text-dark)}
+.fd-point span{color:var(--text-muted);font-size:.9rem}
+@keyframes fdIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.fd-faq{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;margin-bottom:.6rem;padding:.8rem 1rem}
+.fd-faq summary{cursor:pointer;font-weight:700;color:var(--text-dark)}
+.fd-faq p{color:var(--text-muted);font-size:.92rem;margin-top:.5rem}
+</style>
+
+<div class="modal-overlay" id="featModal">
+    <div class="demo-card scrollable-modal-card">
+        <button class="close-modal" id="closeFeatModal" type="button">&times;</button>
+        <div id="featBody"></div>
+    </div>
+</div>
+
+<script>
+(function () {
+    // مفتاح كل ميزة = نفس data-i18n الخاص بعنوان الكارت في اللاندينج
+    const D = {
+        f3Title: { // واتساب CRM
+            ar: { p: ["صندوق وارد موحّد|واتساب وجروبات وماسنجر وإنستغرام في شاشة واحدة، وكل محادثة مربوطة بملف العميل.", "علامات قراءة وحضور حقيقي|صح رمادي وأزرق مع حالة «يكتب الآن».", "قوالب رسائل بالوسائط|جهّز ردودك مرة واحدة وأرسلها بضغطة: نصوص وصور وفيديو وملفات."],
+                  q: [["هل أستطيع ربط أكثر من رقم واتساب؟", "نعم، تربط وتراقب وتعيد ربط عدة أرقام مع فصل العملاء لكل رقم."], ["هل يحتاج الربط لأي برمجة؟", "لا، امسح كود QR أو استخدم كود اقتران من 8 أرقام ويبدأ العمل فوراً."]] },
+            en: { p: ["Unified inbox|WhatsApp, groups, Messenger and Instagram in one screen, each chat linked to the customer profile.", "Real read receipts & presence|Grey/blue ticks and a live \"typing now\" status.", "Media message templates|Prepare replies once and send in one click: text, images, video, files."],
+                  q: [["Can I link more than one WhatsApp number?", "Yes, link, monitor and re-link several numbers, with customers separated per number."], ["Does linking need any coding?", "No, scan a QR code or use an 8-digit pairing code and it works instantly."]] }
+        },
+        f2Title: { // توزيع العملاء
+            ar: { p: ["توزيع لحظي|كل عميل جديد يُدفع فوراً للموظف التالي في الدور، على المتصلين فقط.", "توزيع بالتناوب العادل|حد أقصى لكل موظف وشروط لكل مشروع بدون تدخل يدوي.", "سحب اتوماتيك|العميل المهمل يُسحب بعد مدة تحددها ويُعاد توزيعه، مع سجل كامل."],
+                  q: [["ما مدى سرعة التوزيع اللحظي؟", "فوري تماماً، مع تسجيل كل عملية في سجل التوزيع اللحظي."], ["ماذا يحدث للعملاء المهملين؟", "إذا لم يتفاعل الموظف خلال المدة المحددة يُسحب العميل ويأخذه موظف آخر."]] },
+            en: { p: ["Live assign|Every new lead is pushed instantly to the next online agent in line.", "Fair round-robin|Per-agent caps and per-project rules, no manual work.", "Auto-pull|Neglected leads are pulled after your set time and reassigned, with a full log."],
+                  q: [["How fast is live distribution?", "Instant, and every assignment is recorded in the live-assign log."], ["What happens to neglected leads?", "If the agent doesn't engage within your time limit, the lead is pulled and goes to another agent."]] }
+        },
+        f1Title: { // الوكيل الذكي
+            ar: { p: ["معرفة نشاطك|غذّه بمشاريعك وأسعارك فيرد على واتساب فوراً 24/7 بمعلوماتك أنت.", "يتصرف لا يرد فقط|يحدّث حالة العميل ويضيف ملاحظات تلقائياً.", "تسليم بشري فوري|زر روبوت لكل محادثة، والموظف يستلم بضغطة بدون فقدان السياق."],
+                  q: [["هل يرد بمعلومات نشاطي التجاري؟", "نعم، تغذّيه بمشاريعك وأسعارك فيجيب بمعلوماتك وليس بردود عامة."], ["هل أحتاج حساب OpenAI خاص بي؟", "لا، يوجد مفتاح مركزي جاهز، ويمكنك إضافة مفتاحك الخاص لكل مساحة عمل."]] },
+            en: { p: ["Knows your business|Feed it your projects and prices; it replies on WhatsApp 24/7 with your info.", "Acts, not just chats|Updates lead status and adds notes automatically.", "Instant human handover|A robot button per chat; an agent takes over in one click, context intact."],
+                  q: [["Does it answer with my business info?", "Yes, you feed it your projects and prices, so replies are yours, not generic."], ["Do I need my own OpenAI account?", "No, a central key works by default; you can add your own per workspace."]] }
+        },
+        f5Title: { // الحملات
+            ar: { p: ["حملات جماعية آمنة|رسالة برسالة عبر طابور بفواصل عشوائية تحاكي الإرسال البشري.", "إيقاف واستئناف تلقائي|تتوقف عند انقطاع الحساب وتكمل بعد إعادة الربط.", "رسائل مجدولة|جدول أي رسالة أو حملة بتاريخ ووقت محددين."],
+                  q: [["هل الإرسال الجماعي يسبب حظر رقمي؟", "الإرسال رسالة برسالة بفواصل عشوائية يقلل مؤشرات السبام واحتمالية الحظر بشكل كبير."], ["ماذا لو انقطع الاتصال أثناء الحملة؟", "تتوقف تلقائياً وتستأنف من حيث توقفت، ويُسترد رسوم ما لم يُرسل."]] },
+            en: { p: ["Safe bulk campaigns|One message at a time through a queue with random delays that mimic human sending.", "Auto pause & resume|Stops if the account drops and continues after re-linking.", "Scheduled messages|Schedule any message or campaign for an exact date and time."],
+                  q: [["Will bulk sending get my number banned?", "Sending one-by-one with random delays greatly reduces spam signals and ban risk."], ["What if the connection drops mid-campaign?", "It pauses automatically and resumes where it stopped; unsent messages are refunded."]] }
+        },
+        fAutoLeadTitle: { // القنوات وإعلانات ميتا
+            ar: { p: ["ليدز إعلانات ميتا|نماذج فيسبوك وإنستغرام تتحول لعملاء لحظياً عبر Webhook، مع مزامنة كل 5 دقائق.", "قواعد توزيع لكل نموذج|تعيين لمشروع أو موظف ثابت أو توزيع حي قبل وصول الليد.", "كل القنوات في صندوق واحد|ماسنجر وإنستغرام وClick-to-WhatsApp ونماذج الويب."],
+                  q: [["هل تدخل ليدز الإعلانات تلقائياً فعلاً؟", "نعم، فوراً عبر Webhook ومعها مزامنة احتياطية كل 5 دقائق."], ["هل يغطي النظام ماسنجر وإنستغرام؟", "نعم، تتدفق إلى نفس صندوق الوارد مع واتساب، بنافذة رد 7 أيام."]] },
+            en: { p: ["Meta lead ads|Facebook & Instagram forms become leads instantly via webhook, plus a 5-minute backup sync.", "Per-form routing rules|Assign to a project, fixed agent or live-assign before the lead arrives.", "All channels, one inbox|Messenger, Instagram, Click-to-WhatsApp and web forms."],
+                  q: [["Do ad leads really arrive automatically?", "Yes, instantly via webhook, with a backup sync every 5 minutes."], ["Does it cover Messenger and Instagram?", "Yes, they flow into the same inbox as WhatsApp, with a 7-day reply window."]] }
+        },
+        fCallsTitle: { // الاتصال
+            ar: { p: ["الطلب التلقائي|حوّل أي قائمة عملاء لطابور مكالمات بفاصل من 1 إلى 30 ثانية.", "هاتف SIP برمجي|تحويلة حقيقية على سنترال الشركة بدون كشف رقم الموظف الشخصي.", "تسجيل وتقارير|كل مكالمة تُسجَّل وتُربط بملف العميل مع تقرير لكل موظف."],
+                  q: [["هل يتصل الموظف بدون رقمه الشخصي؟", "نعم، عبر تحويلة النظام على شبكة المكتب فلا يظهر رقمه للعميل."], ["كيف يعمل الاتصال التلقائي؟", "عدّاد تنازلي ثم اتصال ثم تسجيل تعليق ثم الانتقال للعميل التالي."]] },
+            en: { p: ["Auto-dialer|Turn any lead list into a call queue with a 1–30 second interval.", "SIP softphone|A real extension on the company PBX, without exposing staff personal numbers.", "Recording & reports|Every call is recorded, linked to the customer and reported per agent."],
+                  q: [["Can agents call without their personal number?", "Yes, calls go through the system extension, so the customer never sees it."], ["How does the auto-dialer work?", "Countdown, call, log a comment, then it moves on to the next customer."]] }
+        },
+        fPlatformTitle: { // تطبيق الموبايل
+            ar: { p: ["طلب تلقائي وهاتف SIP|اتصل بقائمة عملائك من الموبايل على سنترال الشركة.", "حضور بختم GPS|حضور وانصراف بالموقع ووضع مكتب/منزل، يغذّي كشوف الرواتب.", "تطبيق أصلي iOS وأندرويد|تسجيل دخول واحد للويب والموبايل، وواجهة عربية/إنجليزية."],
+                  q: [["هل التطبيق على App Store وGoogle Play؟", "نعم، تطبيقات أصلية على المتجرين بتسجيل دخول واحد مع الويب."], ["هل الحضور يتحقق من الموقع فعلاً؟", "نعم، كل تسجيل مختوم بإحداثيات GPS."]] },
+            en: { p: ["Auto-dialer & SIP phone|Call your lead list from your phone through the company PBX.", "GPS-stamped attendance|Check in/out by location with office/home mode, feeding payroll.", "Native iOS & Android|One login for web and mobile, with Arabic/English UI."],
+                  q: [["Is the app on the App Store and Google Play?", "Yes, native apps on both, with one login shared with the web."], ["Does attendance really verify location?", "Yes, every check-in is stamped with GPS coordinates."]] }
+        },
+        fDashboardFilterTitle: { // التقارير
+            ar: { p: ["تقرير أداء الفريق|بطاقات KPI وقمع مبيعات وجدول مقارنة لكل مستخدم.", "أفضل 20 وكيلاً|ترتيب يومي مباشر لتحفيز الفريق على الويب والتطبيق.", "وقت الرد وسجل النشاط|متوسط الرد بالدقائق، ومن فعل ماذا ومتى ومن أي IP."],
+                  q: [["هل أرى تقريراً واحداً للفريق كله؟", "نعم، اختر أي مستخدمين أو الجميع في شاشة واحدة."], ["كيف أعرف من أهمل عميلاً؟", "جدول العملاء المسحوبين يوضح من كان معه العميل ومتى وماذا حدث."]] },
+            en: { p: ["Team performance report|KPI cards, sales funnel and a per-user comparison table.", "Top 20 agents|A live daily ranking to motivate the team on web and app.", "Response time & activity log|Average reply time, plus who did what, when, and from which IP."],
+                  q: [["Can I see one report for the whole team?", "Yes, pick any users or everyone in a single screen."], ["How do I know who neglected a lead?", "The pulled-leads table shows who held the lead, when, and what happened."]] }
+        },
+        fHrReportsTitle: { // الحضور والرواتب
+            ar: { p: ["حضور وانصراف بالـ GPS|احتساب ساعات العمل تلقائياً أو استيراد من جهاز البصمة.", "اجتماعات ميدانية|زيارات العملاء بالموقع والوقت تتدفق مباشرة لكشف المرتب.", "سلف وخصومات وكشوف مرتبات|أقساط تلقائية وقواعد خصم وتوليد جماعي بضغطة."],
+                  q: [["هل تُحتسب المرتبات تلقائياً؟", "نعم، قواعد الخصم والسلف والاجتماعات الميدانية تدخل الكشف تلقائياً."], ["هل يعتمد قادة الفرق إجازات فرقهم؟", "نعم، الاعتماد مقيّد بالنطاق فيعتمد القائد إجازات فريقه فقط."]] },
+            en: { p: ["GPS attendance|Work hours calculated automatically, or imported from a fingerprint device.", "Field meetings|Customer visits stamped by place and time flow straight into payroll.", "Advances, deductions & payslips|Automatic installments, deduction rules and bulk generation in one click."],
+                  q: [["Is payroll calculated automatically?", "Yes, deduction rules, advances and field meetings all feed the payslip."], ["Can team leads approve their team's leave?", "Yes, approval is scoped so a lead approves only their own team."]] }
+        },
+        fTeamsTitle: { // الفرق والصلاحيات
+            ar: { p: ["فرق وصلاحيات دقيقة|تحكم في الصفحات والإجراءات وحتى شاشات الموبايل لكل دور، فوراً.", "الدخول كمستخدم|المدير يرى ما يراه الموظف بشريط أحمر وزر رجوع بضغطة.", "سجل نشاط كامل|من فعل ماذا ومتى ومن أي IP وأي صفحة."],
+                  q: [["هل أتحكم فيما يراه كل دور داخل التطبيق؟", "نعم، وتُطبَّق التغييرات فوراً دون تحديث التطبيق."], ["هل يتم تتبّع كل إجراء؟", "نعم، كل إجراء موثّق بالتفصيل في سجل النشاط."]] },
+            en: { p: ["Teams & fine permissions|Control pages, actions and even mobile screens per role, applied instantly.", "Log in as user|Managers see what the agent sees, with a red bar and one-click return.", "Full activity log|Who did what, when, from which IP and page."],
+                  q: [["Can I control what each role sees in the app?", "Yes, and changes apply instantly with no app update."], ["Is every action tracked?", "Yes, each action is logged in detail in the activity log."]] }
+        },
+        fQrTitle: { // الربط والتكاملات
+            ar: { p: ["ربط بمسح QR|أو بكود اقتران من 8 أرقام، بدون أي برمجة.", "تكاملات جاهزة|فيسبوك وإنستغرام والذكاء الاصطناعي والسنترال وأجهزة البصمة ونماذج الويب.", "مفتاحك أو المدمج|استخدم مفتاح OpenAI الخاص بك أو المفتاح المركزي."],
+                  q: [["هل أحتاج برمجة لربط الأدوات؟", "لا، QR لواتساب وضغطة لفيسبوك ولصق مفتاح للذكاء الاصطناعي."], ["هل يعمل على آيفون وأندرويد؟", "نعم، تطبيقات أصلية بالإضافة إلى الويب بتسجيل دخول واحد."]] },
+            en: { p: ["Link by QR scan|Or an 8-digit pairing code, no coding needed.", "Ready integrations|Facebook, Instagram, AI, PBX, fingerprint devices and web forms.", "Your key or built-in|Use your own OpenAI key or the central one."],
+                  q: [["Do I need coding to connect tools?", "No: a QR for WhatsApp, one click for Facebook, paste one key for AI."], ["Does it work on iPhone and Android?", "Yes, native apps plus web, with one login."]] }
+        }
+    };
+    const H = { ar: "اضغط لعرض التفاصيل", en: "Click for details" };
+    const S = { ar: ["أبرز الإمكانيات", "الأسئلة الشائعة"], en: ["Key capabilities", "FAQ"] };
+    const ov = document.getElementById('featModal'), body = document.getElementById('featBody');
+    let cur = null;
+
+    function render() {
+        if (!cur) return;
+        const d = D[cur.k][currentLang], s = S[currentLang];
+        const pts = d.p.map((t, i) => { const [a, b] = t.split('|'); return `<div class="fd-point" style="--i:${i}"><i class="fa-solid fa-circle-check"></i><div><strong>${a}</strong><span>${b}</span></div></div>`; }).join('');
+        const faq = d.q.map(([q, a]) => `<details class="fd-faq"><summary>${q}</summary><p>${a}</p></details>`).join('');
+        body.innerHTML = `<div class="fd-hero"><div class="fd-orb"><div class="feature-icon">${cur.icon}</div></div><h3>${cur.card.querySelector('h3').textContent}</h3></div><div class="fd-sec">${s[0]}</div>${pts}<div class="fd-sec">${s[1]}</div>${faq}`;
+    }
+    function closeIt() { ov.classList.remove('active'); document.body.style.overflow = 'auto'; cur = null; }
+    function hints() { document.querySelectorAll('.more-hint b').forEach(b => b.textContent = H[currentLang]); }
+
+    function openFeatureByKey(k) {
+        const h3 = document.querySelector(`.feature-card h3[data-i18n="${k}"]`);
+        if (!h3 || !D[k]) return;
+        const card = h3.closest('.feature-card');
+        cur = { k, card, icon: card.querySelector('.feature-icon').innerHTML };
+        render();
+        ov.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    document.querySelectorAll('.feature-card').forEach(card => {
+        const k = card.querySelector('h3').dataset.i18n;
+        if (!D[k]) return;
+        card.classList.add('has-details');
+        card.insertAdjacentHTML('beforeend', '<span class="more-hint"><i class="fa-solid fa-hand-pointer"></i><b></b></span>');
+        card.addEventListener('click', () => openFeatureByKey(k));
+    });
+
+    // ربط عناصر المميزات في الفوتر بفتح تفاصيل كل ميزة مباشرة
+    document.querySelectorAll('[data-feat-trigger]').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            openFeatureByKey(link.getAttribute('data-feat-trigger'));
+        });
+    });
+
+    document.getElementById('closeFeatModal').addEventListener('click', closeIt);
+    ov.addEventListener('click', e => { if (e.target === ov) closeIt(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && cur) closeIt(); });
+
+    const _ul = updateLanguage;
+    updateLanguage = function () { _ul(); hints(); render(); };
+    hints();
+})();
+</script>
 </body>
 </html>
